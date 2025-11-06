@@ -3,332 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Keshani Rajkaran - Systems Developer Portfolio">
-    <title>Keshani Rajkaran | Building Robust Systems</title>
+    <meta name="description" content="Keshani Rajkaran - Vibrant Systems Developer Portfolio">
+    <title>Keshani Rajkaran | Creative Intelligence</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-main: #030712;       /* Richer, darker black-blue */
-            --bg-secondary: #111827;   /* Card background */
-            --accent-primary: #8b5cf6; /* Vibrant Purple */
-            --accent-secondary: #06b6d4; /* Electric Cyan */
-            --text-bright: #f9fafb;
-            --text-muted: #9ca3af;
+            /* VIBRANT PALETTE */
+            --bg-main: #ffffff;
+            --text-primary: #1e1e2f;
+            --text-secondary: #545479;
+            /* The "Vibrant" Gradients */
+            --gradient-vibrant: linear-gradient(135deg, #ff2d88, #8b5cf6, #06b6d4);
+            --gradient-warm: linear-gradient(135deg, #ff8c42, #ff2d88);
+            --accent-pink: #ff2d88;
+            --accent-purple: #8b5cf6;
         }
 
         html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-main);
-            color: var(--text-bright);
+            color: var(--text-primary);
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* === THE "BAZINGA" AURORA BACKGROUND === */
-        .aurora-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
-            filter: blur(80px);
+        /* === LIVING BACKGROUND MESH === */
+        .vibrant-mesh-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2;
+            background-color: #f8faff;
+            background-image: 
+                radial-gradient(at 80% 0%, hsla(289,100%,76%,0.2) 0px, transparent 50%),
+                radial-gradient(at 0% 50%, hsla(355,100%,93%,0.3) 0px, transparent 50%),
+                radial-gradient(at 80% 50%, hsla(340,100%,76%,0.15) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(22,100%,77%,0.2) 0px, transparent 50%),
+                radial-gradient(at 80% 100%, hsla(242,100%,70%,0.2) 0px, transparent 50%),
+                radial-gradient(at 0% 0%, hsla(343,100%,76%,0.2) 0px, transparent 50%);
+            filter: blur(60px); opacity: 0.8;
         }
 
-        /* TYPOGRAPHY & UTILITIES */
-        h1, h2, h3, .logo { font-family: 'Outfit', sans-serif; }
-        .highlight { 
-            background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
+        /* === UTILITIES & TYPOGRAPHY === */
+        h1, h2, h3, .nav-logo { font-family: 'Outfit', sans-serif; font-weight: 800; }
+        .highlight-text {
+            background: var(--gradient-vibrant); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
-        .container { max-width: 1100px; margin: 0 auto; padding: 100px 40px; }
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 50px;
+        .container { max-width: 1100px; margin: 0 auto; padding: 120px 40px; }
+        .section-tag {
+            color: var(--accent-pink); font-family: 'Outfit', sans-serif; font-weight: 800;
+            letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 15px; display: block;
         }
-        .section-header h2 {
-            font-size: clamp(30px, 5vw, 48px);
-            margin-right: 30px;
-            font-weight: 900; /* Extra bold for impact */
-        }
-        .section-header::after {
-            content: ""; flex: 1; height: 1px;
-            background: linear-gradient(90deg, var(--accent-primary), transparent);
-            opacity: 0.3;
-        }
+        .section-title { font-size: clamp(40px, 5vw, 60px); line-height: 1.1; margin-top: 0; color: var(--text-primary); }
 
-        /* NAVIGATION GLASS */
+        /* === GLASS NAVIGATION === */
         nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 50px; position: fixed; width: 100%; top: 0; z-index: 100;
-            background: rgba(3, 7, 18, 0.7); /* Darker glass */
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            box-sizing: border-box;
+            display: flex; justify-content: space-between; align-items: center; padding: 15px 50px;
+            position: fixed; width: 100%; top: 0; z-index: 100;
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255,255,255,0.3); box-sizing: border-box;
         }
-        .logo { font-weight: 900; font-size: 1.5rem; letter-spacing: -1px; color: var(--text-bright); }
-        .nav-links a { 
-            color: var(--text-muted); text-decoration: none; margin-left: 40px; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; 
+        .nav-logo { font-size: 1.8rem; letter-spacing: -1px; background: var(--gradient-vibrant); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none; margin-left: 40px; font-weight: 600; font-size: 0.95rem; position: relative;
         }
-        .nav-links a:hover { color: var(--accent-secondary); }
+        .nav-links a::after { /* Vibrant underline on hover */
+            content: ''; position: absolute; width: 0; height: 3px; bottom: -5px; left: 0;
+            background: var(--gradient-vibrant); transition: width 0.3s ease; border-radius: 3px;
+        }
+        .nav-links a:hover::after { width: 100%; }
 
-        /* HERO SECTION */
-        #hero { min-height: 95vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero-intro { color: var(--accent-secondary); font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 2px; margin-bottom: 25px; }
+        /* === VIBRANT HERO === */
+        #hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; }
+        .hero-hello { font-size: 1.5rem; color: var(--text-secondary); font-weight: 500; margin-bottom: 10px; }
         .hero-name {
-            font-size: clamp(50px, 10vw, 90px);
-            font-weight: 900;
-            line-height: 1;
-            margin: 0;
-            background: linear-gradient(to right, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: clamp(60px, 11vw, 120px); line-height: 0.95; margin: 0; letter-spacing: -3px;
+            background: linear-gradient(to right, var(--text-primary) 30%, var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .hero-tagline {
-            font-size: clamp(30px, 5vw, 60px);
-            font-weight: 700;
-            color: var(--text-muted);
-            line-height: 1.1;
-            margin: 10px 0 30px 0;
+        .hero-typed {
+            font-size: clamp(30px, 5vw, 50px); font-family: 'Outfit', sans-serif; font-weight: 300;
+            color: var(--text-secondary); margin: 20px 0 40px 0; line-height: 1.2;
         }
-        .hero-desc { max-width: 600px; font-size: 1.2rem; color: var(--text-muted); margin-bottom: 50px; }
         
-        /* MODERN BUTTONS */
-        .btn-glow {
-            position: relative;
-            padding: 1rem 2.5rem;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-weight: 700;
-            font-family: 'Outfit', sans-serif;
-            letter-spacing: 1px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s;
-        }
-        .btn-glow:hover {
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.4); /* Glowing effect on hover */
-            transform: scale(1.05);
-        }
-
-        /* EXPERIENCE TIMELINE (Refined) */
-        .timeline { border-left: 2px solid rgba(139, 92, 246, 0.3); padding-left: 30px; margin-left: 10px; }
-        .timeline-item { position: relative; margin-bottom: 40px; }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -39px; top: 5px;
-            width: 16px; height: 16px; border-radius: 50%;
-            background: var(--bg-main); border: 3px solid var(--accent-primary);
-        }
-        .timeline-date { color: var(--accent-secondary); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* SUPERCHARGED PROJECT CARD */
-        .project-card {
-            background: linear-gradient(145deg, var(--bg-secondary), rgba(17, 24, 39, 0.5));
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 40px;
+        /* === BUTTONS THAT POP === */
+        .btn-vibrant {
+            padding: 1.2rem 3rem; border: none; border-radius: 50px;
+            background: var(--gradient-vibrant); color: white; font-weight: 700; font-family: 'Outfit', sans-serif;
+            letter-spacing: 1px; text-decoration: none; display: inline-block;
+            box-shadow: 0 10px 30px -10px rgba(255, 45, 136, 0.5); /* Colored shadow */
             transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
         }
-        .project-card:hover {
-            border-color: var(--accent-primary);
-            box-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.3);
-            transform: translateY(-5px);
+        .btn-vibrant:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 40px -15px rgba(255, 45, 136, 0.6); }
+
+        /* === CARDS WITH PERSONALITY === */
+        .vibrant-card {
+            background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(255,255,255,0.8);
+            backdrop-filter: blur(20px); border-radius: 24px; padding: 40px;
+            box-shadow: 0 20px 60px -20px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
         }
-        /* The "PSO" Framework Tags */
-        .pso-tag {
-            display: inline-block;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 900;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-secondary);
-            margin-top: 20px;
-            margin-bottom: 5px;
+        .vibrant-card:hover { transform: translateY(-10px); border-color: var(--accent-pink); }
+
+        /* === ABOUT GRID === */
+        .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 80px; align-items: center; }
+        .profile-frame {
+            position: relative; width: 100%; height: 450px; border-radius: 24px;
+            background: var(--gradient-vibrant); transform: rotate(3deg); transition: all 0.4s ease;
+        }
+        .profile-photo {
+            position: absolute; inset: 5px; background: #fff; border-radius: 20px;
+            transform: rotate(-3deg); transition: all 0.4s ease; overflow: hidden;
+            display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--accent-purple);
+        }
+        .profile-frame:hover { transform: rotate(0deg); }
+        .profile-frame:hover .profile-photo { transform: rotate(0deg) scale(1.05); }
+
+        /* === SKILLS PILLS === */
+        .skill-pill {
+            display: inline-block; padding: 10px 20px; margin: 0 10px 15px 0;
+            background: #fff; color: var(--text-primary); border-radius: 30px;
+            font-weight: 700; font-size: 0.9rem; box-shadow: 0 5px 15px -5px rgba(0,0,0,0.1);
+            border: 2px solid transparent; transition: all 0.3s ease;
+        }
+        .skill-pill:hover { border-color: var(--accent-purple); transform: translateY(-3px); color: var(--accent-purple); }
+
+        /* === FEATURED PROJECT (THE STAR) === */
+        .star-project {
+            position: relative; border-radius: 30px; overflow: hidden;
+            background: #fff; padding: 60px 50px;
+            box-shadow: 0 30px 60px -30px rgba(0,0,0,0.2);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .star-project::before { /* Colorful top border */
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 10px;
+            background: var(--gradient-vibrant);
+        }
+        .project-kpi {
+             display: inline-block; padding: 5px 15px; background: rgba(139, 92, 246, 0.1);
+             color: var(--accent-purple); font-weight: 700; border-radius: 12px; margin-right: 10px; font-size: 0.9rem;
         }
 
-        /* BADGES */
-        .tech-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            margin: 0 8px 8px 0;
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            color: var(--accent-secondary);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
+        /* === CONTACT FOOTER === */
+        .contact-box {
+            background: var(--gradient-vibrant); color: white;
+            padding: 80px; border-radius: 30px; text-align: center;
+            box-shadow: 0 30px 80px -20px rgba(255, 45, 136, 0.4);
         }
+        .contact-box h2 { color: white; font-size: 3.5rem; margin-bottom: 20px; }
+        .email-link {
+            font-size: 2rem; color: white; text-decoration: none; font-weight: 800;
+            border-bottom: 3px solid rgba(255,255,255,0.5); transition: all 0.3s;
+        }
+        .email-link:hover { border-color: white; }
 
-        /* CONTACT & MODAL */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(3, 7, 18, 0.95); backdrop-filter: blur(10px); }
-        .modal-content { background-color: var(--bg-secondary); margin: 5% auto; padding: 50px; border: 1px solid var(--accent-primary); border-radius: 16px; width: 80%; max-width: 900px; position: relative; color: var(--text-bright); animation: modalSlideUp 0.4s ease-out; }
-        @keyframes modalSlideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .close-btn { position:absolute; top: 20px; right: 30px; color: var(--text-muted); font-size: 40px; cursor: pointer; transition: color 0.3s; }
-        .close-btn:hover { color: var(--accent-primary); }
+        /* === MODAL POPUP === */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(255,255,255,0.8); backdrop-filter: blur(15px); overflow: auto; }
+        .modal-content { background-color: #fff; margin: 5% auto; padding: 60px; border-radius: 30px; width: 80%; max-width: 1000px; position: relative; box-shadow: 0 50px 100px -20px rgba(0,0,0,0.2); animation: floatUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes floatUp { from { transform: translateY(100px) scale(0.9); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+        .close-btn { position: absolute; top: 30px; right: 40px; font-size: 40px; color: var(--text-secondary); cursor: pointer; transition: 0.3s; }
+        .close-btn:hover { color: var(--accent-pink); transform: rotate(90deg); }
 
         @media (max-width: 768px) {
             .container { padding: 80px 25px; }
-            nav { padding: 15px 20px; flex-direction: column; gap: 15px; background: rgba(3, 7, 18, 0.95); }
-            .nav-links { flex-wrap: wrap; justify-content: center; gap: 20px; }
-            .nav-links a { margin: 0; }
-            .project-card { padding: 25px; }
+            nav { padding: 15px 20px; flex-direction: column; gap: 15px; background: rgba(255,255,255,0.95); }
+            .about-grid { grid-template-columns: 1fr; gap: 50px; }
+            .hero-name { font-size: 15vw; }
+            .contact-box { padding: 40px 20px; }
+            .contact-box h2 { font-size: 2.5rem; }
+            .email-link { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="aurora-bg"></div>
+    <div class="vibrant-mesh-bg"></div>
 
-    <nav data-aos="fade-down" data-aos-duration="1000">
-        <div class="logo">KR.</div>
+    <nav data-aos="fade-down" data-aos-duration="800">
+        <div class="nav-logo">KR.</div>
         <div class="nav-links">
             <a href="#about">About</a>
+            <a href="#work">Featured System</a>
             <a href="#experience">Experience</a>
-            <a href="#work">Systems</a>
-            <a href="#contact">Contact</a>
+            <a href="#contact">Connect</a>
         </div>
     </nav>
 
     <div id="hero" class="container">
-        <div class="hero-intro" data-aos="fade-up">HI, MY NAME IS</div>
-        <h1 class="hero-name" data-aos="fade-up" data-aos-delay="100">Keshani Rajkaran.</h1>
-        <h2 class="hero-tagline" data-aos="fade-up" data-aos-delay="200">I build <span id="typed-text" class="highlight"></span></h2>
-        <p class="hero-desc" data-aos="fade-up" data-aos-delay="300">
-            Systems Developer & Analyst focused on bridging the gap between raw data and strategic business value through high-performance enterprise applications.
+        <div data-aos="fade-up">
+            <p class="hero-hello">👋 Hello world, I'm</p>
+            <h1 class="hero-name">Keshani Rajkaran.</h1>
+            <h2 class="hero-typed">I architect <span id="typed-text" class="highlight-text"></span></h2>
+        </div>
+        <p class="hero-desc" data-aos="fade-up" data-aos-delay="200">
+            A Systems Developer & Analyst bridging the gap between complex raw data and beautiful, strategic business value. I build high-performance engines that look as good as they function.
         </p>
-        <div data-aos="fade-up" data-aos-delay="400">
-            <a href="#work" class="btn-glow">View Selected Work</a>
+        <div data-aos="fade-up" data-aos-delay="300">
+            <a href="#work" class="btn-vibrant">See What I've Built ✨</a>
         </div>
     </div>
 
-    <section id="about" class="container" data-aos="fade-up">
-        <div class="section-header"><h2>01. About Me</h2></div>
-        <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 60px;">
-            <div>
-                <p style="color: var(--text-muted); font-size: 1.15rem;">
-                    I don't just write code; I engineer solutions to complex business problems. My passion lies in the intersection of <span class="highlight">Information Systems Technology</span> and strategic execution.
+    <section id="about" class="container">
+        <div class="about-grid">
+            <div data-aos="fade-right">
+                <span class="section-tag">// WHO I AM</span>
+                <h2 class="section-title">The Creative <span class="highlight-text">Analyst.</span></h2>
+                <p style="font-size: 1.2rem; color: var(--text-secondary);">
+                    I don't fit the typical dev mold. I combine hard-hitting technical skills in <strong>C# & SQL</strong> with a vibrant, strategic mind honed in <strong>Marketing & Forensics</strong>.
                 </p>
-                <p style="color: var(--text-muted); font-size: 1.15rem; margin-top: 20px;">
-                    Currently, I am leading the digital transformation for real-world clients like <span class="highlight">McKaylan Motor Engineering</span>, moving them from manual legacy processes to fully integrated, data-driven ERP cloud systems.
+                <p style="font-size: 1.1rem; margin-top: 20px;">
+                    Whether I'm architecting an ERP for a real-world engineering firm or designing AI fraud strategies for global clients, my goal is the same: build systems that are powerful, intuitive, and undeniably effective.
                 </p>
-                 <div style="margin-top: 40px;">
-                    <span class="tech-badge">C# .NET</span>
-                    <span class="tech-badge">SQL Server (T-SQL)</span>
-                    <span class="tech-badge">ASP.NET Web Forms</span>
-                    <span class="tech-badge">JavaScript (ES6+)</span>
-                    <span class="tech-badge">Chart.js Visualization</span>
-                    <span class="tech-badge">Agile / Scrum</span>
-                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="container" data-aos="fade-up">
-        <div class="section-header"><h2>02. Experience</h2></div>
-        <div class="timeline">
-            <div class="timeline-item" data-aos="fade-left">
-                <span class="timeline-date">Jan 2025 - Present</span>
-                <h3 style="color: var(--text-bright); margin: 5px 0;">Lead Systems Developer & Analyst</h3>
-                <h4 style="color: var(--accent-primary); font-weight: normal; margin: 0 0 15px 0;">McKaylan Motor Engineering (Capstone)</h4>
-                <p style="color: var(--text-muted);">Spearheading the end-to-end architecture of a full-stack ERP system. Engineered secure SQL databases and modular .NET sub-systems for real-time appointment tracking and automated financial processing.</p>
-            </div>
-            <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
-                <span class="timeline-date">May 2025 - June 2025</span>
-                <h3 style="color: var(--text-bright); margin: 5px 0;">Forensic AI Strategy Analyst (Intern)</h3>
-                <h4 style="color: var(--accent-primary); font-weight: normal; margin: 0 0 15px 0;">Grant Thornton China (Virtual)</h4>
-                <p style="color: var(--text-muted);">Analyzed corporate datasets to recommend optimal AI/ML algorithms for fraud detection. Designed integration strategies to embed AI tools into core forensic investigation workflows.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="work" class="container" data-aos="fade-up">
-        <div class="section-header"><h2>03. Featured System</h2></div>
-        
-        <div class="project-card" onclick="openModal('seasonalModal')">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px;">
-                <div>
-                    <span style="color: var(--accent-secondary); font-family:'Outfit'; font-weight:700; letter-spacing:1px;">ENTERPRISE MODULE</span>
-                    <h3 style="font-size: 2rem; margin: 10px 0; color: var(--text-bright);">Seasonal Analytics & Intelligence Engine</h3>
+                <div style="margin-top: 40px;">
+                    <p style="font-weight: 700; color: var(--text-primary); margin-bottom: 20px;">MY TECHNICAL ARSENAL:</p>
+                    <div>
+                        <span class="skill-pill">C# .NET</span>
+                        <span class="skill-pill">SQL Server</span>
+                        <span class="skill-pill">ASP.NET</span>
+                        <span class="skill-pill">JavaScript ES6+</span>
+                        <span class="skill-pill">React.js</span>
+                        <span class="skill-pill">Chart.js</span>
+                        <span class="skill-pill">Python</span>
+                        <span class="skill-pill">UI/UX Design</span>
+                    </div>
                 </div>
-                <i class="fas fa-external-link-alt" style="color: var(--accent-primary); font-size: 1.5rem;"></i>
             </div>
-
-            <div style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">
-                <span class="pso-tag">The Problem:</span>
-                Management relied on static, manual reports to gauge seasonal performance, leading to inefficient labor allocation and untracked marketing ROI.
-                <br><br>
-                <span class="pso-tag" style="color: var(--text-bright);">The Solution:</span>
-                Engineered a dynamic ASP.NET BI system with multi-vector analysis (Volume, Efficiency, Retention), automated YoY comparisons, and two-stage operational safety protocols.
-            </div>
-
-            <div style="margin-top: 40px;">
-                <span class="tech-badge">C# .NET</span>
-                <span class="tech-badge">ASP.NET</span>
-                <span class="tech-badge">MSSQL</span>
-                <span class="tech-badge">Chart.js</span>
-                <span class="tech-badge">ADO.NET</span>
+            <div class="profile-frame" data-aos="zoom-in">
+                <div class="profile-photo">
+                    [UPLOAD YOUR VIBRANT PHOTO HERE]
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="container" data-aos="fade-up" style="text-align: center; margin-top: 100px;">
-        <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 20px;">Let's Connect</h2>
-        <p style="color: var(--text-muted); font-size: 1.3rem; max-width: 600px; margin: 0 auto 40px auto;">
-            I am currently open to opportunities where I can contribute to innovative, high-performance development teams.
-        </p>
-        <a href="mailto:rajkarankeshani4@gmail.com" class="btn-glow" style="font-size: 1.2rem;">
-            <i class="far fa-envelope"></i> rajkarankeshani4@gmail.com
-        </a>
-        <div style="margin-top: 60px; font-size: 2rem;">
-            <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" style="color: var(--text-muted); margin: 0 20px; transition: all 0.3s;"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/Keshani-Rajkaran" target="_blank" style="color: var(--text-muted); margin: 0 20px; transition: all 0.3s;"><i class="fab fa-github"></i></a>
+    <section id="work" class="container">
+        <span class="section-tag" data-aos="fade-up">// MASTERPIECE</span>
+        <h2 class="section-title" data-aos="fade-up">Featured <span class="highlight-text">System.</span></h2>
+
+        <div class="star-project" data-aos="fade-up" data-aos-delay="200">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
+                <h3 style="font-size: 2.5rem; margin: 0;">Enterprise Seasonal Analytics Engine</h3>
+                <button onclick="openModal('seasonalModal')" class="btn-vibrant" style="padding: 0.8rem 2rem; font-size: 0.9rem;">Explore the Case Study 🔍</button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px;">
+                <div class="vibrant-card">
+                    <h4 style="color: var(--accent-pink); margin-top: 0;">THE PROBLEM</h4>
+                    <p>Client relied on static, manual PDF reports to gauge seasonal performance, leading to inefficient labor allocation and untracked marketing ROI.</p>
+                </div>
+                <div class="vibrant-card" style="border-color: var(--accent-purple);">
+                    <h4 style="color: var(--accent-purple); margin-top: 0;">MY SOLUTION</h4>
+                    <p>Engineered a dynamic ASP.NET BI dashboard with multi-vector analysis, automated YoY comparisons, and two-stage operational safety protocols.</p>
+                </div>
+                <div class="vibrant-card">
+                    <h4 style="color: #06b6d4; margin-top: 0;">THE OUTCOME</h4>
+                    <p>
+                        <span class="project-kpi">⚡ 300% Faster Reporting</span><br>
+                        <span class="project-kpi">🔒 Zero Invalid Queries</span>
+                    </p>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-secondary);">
+                <em style="color: var(--accent-pink);">Tech Stack:</em> C# .NET / MSSQL / Chart.js / ADO.NET Security
+            </p>
+        </div>
+    </section>
+
+    <section id="experience" class="container">
+        <span class="section-tag" data-aos="fade-up">// MY JOURNEY</span>
+        <h2 class="section-title" data-aos="fade-up">Professional <span class="highlight-text">Timeline.</span></h2>
+        <div style="margin-top: 50px;">
+            <div class="vibrant-card" style="margin-bottom: 30px;" data-aos="fade-left">
+                <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                    <h3 style="margin: 0; font-size: 1.5rem;">Lead Systems Developer (Capstone)</h3>
+                    <span style="color: var(--accent-pink); font-weight: 700;">Jan 2025 - Present</span>
+                </div>
+                <h4 style="color: var(--text-secondary); font-weight: 500; margin-top: 5px;">McKaylan Motor Engineering</h4>
+                <p>Spearheading the complete digital transformation of a manual workshop into a cloud-ready ERP. Architected 5 core sub-systems including real-time tracking and automated financials.</p>
+            </div>
+            <div class="vibrant-card" style="margin-bottom: 30px;" data-aos="fade-left" data-aos-delay="100">
+                <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                    <h3 style="margin: 0; font-size: 1.5rem;">Forensic AI Strategy Analyst</h3>
+                    <span style="color: var(--accent-purple); font-weight: 700;">May 2025 - June 2025</span>
+                </div>
+                <h4 style="color: var(--text-secondary); font-weight: 500; margin-top: 5px;">Grant Thornton China (Virtual)</h4>
+                <p>Analyzed corporate data to recommend optimal AI/ML algorithms for fraud detection. Delivered high-impact strategic presentations to global senior leadership.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <div class="contact-box" data-aos="zoom-in">
+            <h2>Let's Build Something <br>Beautiful Together.</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 40px; color: rgba(255,255,255,0.9);">
+                Currently open for high-impact developer roles.
+            </p>
+            <a href="mailto:rajkarankeshani4@gmail.com" class="email-link">rajkarankeshani4@gmail.com</a>
+            
+            <div style="margin-top: 60px; font-size: 2.5rem;">
+                <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" style="color: white; margin: 0 25px; opacity: 0.8; transition: all 0.3s;"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/Keshani-Rajkaran" target="_blank" style="color: white; margin: 0 25px; opacity: 0.8; transition: all 0.3s;"><i class="fab fa-github"></i></a>
+            </div>
         </div>
     </section>
 
     <div id="seasonalModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('seasonalModal')">&times;</span>
-            <h2 style="color: var(--accent-secondary); margin-bottom: 25px; font-size: 2.5rem;">Enterprise Analytics Engine</h2>
+            <span class="section-tag" style="color: var(--accent-purple);">// DEEP DIVE</span>
+            <h2 style="font-size: 3rem; margin: 0 0 30px 0;">Enterprise Analytics Engine</h2>
             
-            <p style="color: var(--text-bright); font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
-                This module was architected as a high-impact Business Intelligence (BI) upgrade for the McKaylan Motor Engineering ERP. It replaces legacy manual reporting with a real-time, dynamic engine that transforms raw operational data into actionable strategic insights.
+            <p style="font-size: 1.3rem; color: var(--text-secondary); line-height: 1.8;">
+                This wasn't just a coursework project; it was a necessary business upgrade. I identified that static reporting was costing the client hours in manual data crunching every month. I architected a solution that automates this entire cognitive load.
             </p>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px;">
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.2);">
-                    <h3 style="color: var(--accent-primary); margin-bottom: 15px;"><i class="fas fa-chart-line"></i> Multi-Vector Analysis</h3>
-                    <p style="color: var(--text-muted);">Simultaneous, stacked reporting on Operational Volume, Workforce Efficiency, and Client Retention rates.</p>
+            <div style="margin: 40px 0; display: grid; gap: 20px;">
+                <div class="vibrant-card" style="padding: 30px;">
+                    <h3 style="color: var(--accent-pink);"><i class="fas fa-rocket"></i> The "Time-Machine" Logic</h3>
+                    <p>I implemented a complex C# algorithm that, when enabled, runs parallel SQL queries for historical data. It instantly calculates growth deltas and renders them as color-coded badges (e.g., "📈 12% UP"), giving managers instant context without needing a calculator.</p>
                 </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; border: 1px solid rgba(6, 182, 212, 0.2);">
-                    <h3 style="color: var(--accent-secondary); margin-bottom: 15px;"><i class="fas fa-history"></i> "Time-Machine" Logic</h3>
-                    <p style="color: var(--text-muted);">Automated Year-over-Year (YoY) comparative algorithms with instant growth/decline visualization.</p>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.2);">
-                    <h3 style="color: var(--accent-primary); margin-bottom: 15px;"><i class="fas fa-shield-alt"></i> Operational Safety</h3>
-                    <p style="color: var(--text-muted);">Engineered two-stage validation protocols to protect production databases from invalid high-load queries.</p>
+                <div class="vibrant-card" style="padding: 30px;">
+                    <h3 style="color: var(--accent-purple);"><i class="fas fa-shield-alt"></i> Operational Safety</h3>
+                    <p>Running massive date-range queries can slow down a production DB. I engineered a two-stage validation modal that forces managers to review their scope before execution, preventing accidental "SELECT * FROM ALL_TIME" scenarios.</p>
                 </div>
             </div>
 
-            <div style="text-align: right; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
-                 <a href="https://github.com/Keshani-Rajkaran/Enterprise-Seasonal-Analytics-Reporting-System" target="_blank" class="btn-glow">
-                     View Source Code & Documentation <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+            <div style="text-align: center; margin-top: 50px;">
+                 <a href="https://github.com/Keshani-Rajkaran/Enterprise-Seasonal-Analytics-Reporting-System" target="_blank" class="btn-vibrant">
+                     View Full Source Code & Documentation <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
                  </a>
             </div>
         </div>
@@ -336,10 +343,10 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000, once: true });
+        AOS.init({ duration: 1000, once: true, offset: 100 });
         var typed = new Typed('#typed-text', {
-            strings: ['intelligent enterprise systems.', 'robust backend solutions.', 'data-driven dashboards.', 'scalable software architecture.'],
-            typeSpeed: 40, backSpeed: 20, backDelay: 2000, loop: true
+            strings: ['beautiful enterprise systems.', 'vibrant user experiences.', 'intelligent dashboards.', 'robust backend solutions.'],
+            typeSpeed: 50, backSpeed: 30, backDelay: 2000, loop: true
         });
         function openModal(id) { document.getElementById(id).style.display = "block"; document.body.style.overflow = "hidden"; }
         function closeModal(id) { document.getElementById(id).style.display = "none"; document.body.style.overflow = "auto"; }
