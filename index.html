@@ -6,31 +6,27 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    
+
     <meta name="description" content="Keshani Rajkaran - Vibrant Systems Developer Portfolio">
     <title>Keshani Rajkaran | Creative Intelligence</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* HYPER-VIBRANT PALETTE */
-            --bg-main: #f0f9ff; /* Crisp, very light blue-white base */
-            --text-primary: #0f172a; /* Deep navy-black for sharp text */
-            --text-secondary: #475569; /* Softer slate-grey */
-            
-            --neon-pink: #ec4899; /* Hot Pink */
-            --electric-violet: #8b5cf6; /* Vibrant Purple */
-            --radiant-cyan: #06b6d4; /* Bright Cyan */
-
+            --bg-main: #f0f9ff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --neon-pink: #ec4899;
+            --electric-violet: #8b5cf6;
+            --radiant-cyan: #06b6d4;
             --gradient-hero: linear-gradient(135deg, var(--neon-pink), var(--electric-violet));
             --gradient-accent: linear-gradient(90deg, var(--radiant-cyan), var(--electric-violet));
         }
 
-        html { scroll-behavior: smooth; }
+        /* FAILSAFE: Ensure body is always visible */
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-main);
@@ -38,136 +34,66 @@
             margin: 0;
             line-height: 1.7;
             overflow-x: hidden;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
-        /* === LIVING COLOR SPLASHES (The Dopamine Hits) === */
-        .splash-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden;
-        }
-        .splash {
-            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4;
-            animation: float 20s infinite alternate ease-in-out;
-        }
+        html { scroll-behavior: smooth; }
+
+        /* === LIVING COLOR SPLASHES === */
+        .splash-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .splash { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 20s infinite alternate ease-in-out; }
         .splash-1 { width: 600px; height: 600px; top: -10%; left: -10%; background: var(--neon-pink); }
         .splash-2 { width: 500px; height: 500px; bottom: 10%; right: -10%; background: var(--radiant-cyan); animation-delay: -5s; }
         .splash-3 { width: 300px; height: 300px; top: 40%; right: 15%; background: var(--electric-violet); animation-delay: -10s; opacity: 0.25; }
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 50px) scale(1.1); } }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, 50px) scale(1.1); }
-        }
-
-        /* === TYPOGRAPHY & UTILITIES === */
+        /* === TYPOGRAPHY === */
         h1, h2, h3, .nav-logo, .btn-vibrant { font-family: 'Outfit', sans-serif; font-weight: 800; }
-        .highlight-text {
-            background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
+        .highlight-text { background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
         .container { max-width: 1100px; margin: 0 auto; padding: 120px 30px; }
-        .section-tag {
-            color: var(--electric-violet); font-family: 'Outfit', sans-serif; font-weight: 800;
-            letter-spacing: 3px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 15px; display: block;
-        }
-        .section-title {
-            font-size: clamp(40px, 7vw, 65px); line-height: 1.05; margin-top: 0; color: var(--text-primary);
-        }
+        .section-tag { color: var(--electric-violet); font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 15px; display: block; }
+        .section-title { font-size: clamp(40px, 7vw, 65px); line-height: 1.05; margin-top: 0; color: var(--text-primary); }
 
-        /* === GLASS NAVIGATION === */
-        nav {
-            display: flex; justify-content: space-between; align-items: center; padding: 15px 50px;
-            position: fixed; width: 100%; top: 0; z-index: 100;
-            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.5); box-sizing: border-box;
-        }
+        /* === NAVIGATION === */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.5); box-sizing: border-box; }
         .nav-logo { font-size: 1.8rem; letter-spacing: -1px; color: var(--text-primary); }
-        .nav-links a {
-            color: var(--text-secondary); text-decoration: none; margin-left: 40px; font-weight: 700; font-size: 0.95rem;
-            transition: color 0.3s;
-        }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; margin-left: 40px; font-weight: 700; font-size: 0.95rem; transition: color 0.3s; }
         .nav-links a:hover { color: var(--neon-pink); }
 
-        /* === HERO SECTION === */
+        /* === HERO === */
         #hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; }
         .hero-hello { font-size: 1.5rem; color: var(--electric-violet); font-weight: 700; margin-bottom: 15px; }
-        .hero-name {
-            font-size: clamp(60px, 12vw, 130px); line-height: 0.9; margin: 0; letter-spacing: -3px;
-            color: var(--text-primary);
-        }
-        .hero-typed {
-            font-size: clamp(30px, 5vw, 50px); font-family: 'Outfit', sans-serif; font-weight: 300;
-            color: var(--text-secondary); margin: 25px 0 45px 0; line-height: 1.2;
-        }
+        .hero-name { font-size: clamp(60px, 12vw, 130px); line-height: 0.9; margin: 0; letter-spacing: -3px; color: var(--text-primary); }
+        .hero-typed { font-size: clamp(30px, 5vw, 50px); font-family: 'Outfit', sans-serif; font-weight: 300; color: var(--text-secondary); margin: 25px 0 45px 0; line-height: 1.2; }
 
-        /* === BUTTONS === */
-        .btn-vibrant {
-            padding: 1.2rem 3rem; border: none; border-radius: 50px;
-            background: var(--gradient-hero); color: white; font-weight: 800; letter-spacing: 1px;
-            text-decoration: none; display: inline-block;
-            box-shadow: 0 15px 35px -10px rgba(236, 72, 153, 0.5);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy! */
-        }
+        /* === COMPONENTS === */
+        .btn-vibrant { padding: 1.2rem 3rem; border: none; border-radius: 50px; background: var(--gradient-hero); color: white; font-weight: 800; letter-spacing: 1px; text-decoration: none; display: inline-block; box-shadow: 0 15px 35px -10px rgba(236, 72, 153, 0.5); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .btn-vibrant:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 20px 50px -10px rgba(236, 72, 153, 0.7); }
-
-        /* === CARDS THAT POP === */
-        .vibrant-card {
-            background: rgba(255, 255, 255, 0.8); border: 2px solid #fff;
-            border-radius: 30px; padding: 40px;
-            box-shadow: 0 20px 60px -15px rgba(139, 92, 246, 0.15); /* Purple tinted shadow */
-            transition: all 0.3s ease;
-        }
+        .vibrant-card { background: rgba(255, 255, 255, 0.8); border: 2px solid #fff; border-radius: 30px; padding: 40px; box-shadow: 0 20px 60px -15px rgba(139, 92, 246, 0.15); transition: all 0.3s ease; }
         .vibrant-card:hover { transform: translateY(-10px); border-color: var(--radiant-cyan); }
         .vibrant-card h3, .vibrant-card h4 { color: var(--electric-violet); margin-top: 0; }
 
-        /* === ABOUT GRID === */
         .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 80px; align-items: center; }
-        .profile-frame {
-            position: relative; width: 100%; padding-top: 100%; border-radius: 60px;
-            background: var(--gradient-accent); transform: rotate(-6deg); transition: all 0.5s ease;
-        }
-        .profile-photo {
-            position: absolute; inset: 8px; background: #fff; border-radius: 55px;
-            transform: rotate(6deg); transition: all 0.5s ease; overflow: hidden;
-            display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--text-secondary);
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
-        }
+        .profile-frame { position: relative; width: 100%; padding-top: 100%; border-radius: 60px; background: var(--gradient-accent); transform: rotate(-6deg); transition: all 0.5s ease; }
+        .profile-photo { position: absolute; inset: 8px; background: #fff; border-radius: 55px; transform: rotate(6deg); transition: all 0.5s ease; overflow: hidden; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--text-secondary); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1); }
         .profile-frame:hover { transform: rotate(0deg); }
         .profile-frame:hover .profile-photo { transform: rotate(0deg) scale(1.02); }
 
-        /* === SKILLS === */
-        .skill-pill {
-            display: inline-block; padding: 10px 20px; margin: 0 10px 15px 0;
-            background: #fff; color: var(--text-primary); font-weight: 700; border-radius: 15px;
-            box-shadow: 0 8px 20px -5px rgba(139, 92, 246, 0.15);
-            border: 2px solid transparent; transition: all 0.3s ease;
-        }
+        .skill-pill { display: inline-block; padding: 10px 20px; margin: 0 10px 15px 0; background: #fff; color: var(--text-primary); font-weight: 700; border-radius: 15px; box-shadow: 0 8px 20px -5px rgba(139, 92, 246, 0.15); border: 2px solid transparent; transition: all 0.3s ease; }
         .skill-pill:hover { border-color: var(--electric-violet); color: var(--electric-violet); transform: translateY(-3px); }
 
-        /* === FEATURED PROJECT (STAR) === */
-        .star-project {
-            background: #fff; border-radius: 40px; padding: 60px;
-            box-shadow: 0 40px 100px -20px rgba(6, 182, 212, 0.15); /* Cyan tinted shadow */
-            position: relative; overflow: hidden; border: 2px solid #fff;
-            transition: transform 0.3s ease;
-        }
+        .star-project { background: #fff; border-radius: 40px; padding: 60px; box-shadow: 0 40px 100px -20px rgba(6, 182, 212, 0.15); position: relative; overflow: hidden; border: 2px solid #fff; transition: transform 0.3s ease; }
         .star-project:hover { transform: scale(1.01); }
-        .star-project::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 8px;
-            background: var(--gradient-hero);
-        }
+        .star-project::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 8px; background: var(--gradient-hero); }
+        .project-kpi { display: inline-block; padding: 8px 18px; background: var(--radiant-cyan); color: white; font-weight: 700; border-radius: 10px; margin-right: 12px; font-size: 0.9rem; margin-bottom: 10px; }
 
-        /* === CONTACT === */
-        .contact-box {
-            background: var(--gradient-hero); color: white; padding: 80px; border-radius: 40px;
-            text-align: center; box-shadow: 0 30px 80px -20px rgba(236, 72, 153, 0.5);
-        }
-        .email-link {
-            font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 800; color: white; text-decoration: none;
-            border-bottom: 4px solid rgba(255,255,255,0.4); transition: all 0.3s;
-        }
+        .contact-box { background: var(--gradient-hero); color: white; padding: 80px; border-radius: 40px; text-align: center; box-shadow: 0 30px 80px -20px rgba(236, 72, 153, 0.5); }
+        .email-link { font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 800; color: white; text-decoration: none; border-bottom: 4px solid rgba(255,255,255,0.4); transition: all 0.3s; }
         .email-link:hover { border-color: #fff; }
 
-        /* === MODAL === */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(255,255,255,0.9); backdrop-filter: blur(15px); overflow: auto; }
+        /* MODAL */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(255,255,255,0.9); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); overflow: auto; }
         .modal-content { background-color: #fff; margin: 5% auto; padding: 60px; border-radius: 40px; width: 85%; max-width: 1000px; position: relative; box-shadow: 0 50px 100px -30px rgba(139, 92, 246, 0.3); animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
         @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .close-btn { position: absolute; top: 30px; right: 40px; font-size: 40px; color: var(--text-secondary); cursor: pointer; transition: 0.3s; }
@@ -176,6 +102,8 @@
         @media (max-width: 768px) {
             .container { padding: 100px 25px; }
             nav { padding: 15px 20px; flex-direction: column; gap: 15px; background: rgba(255,255,255,0.95); }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 20px; }
+            .nav-links a { margin: 0; }
             .about-grid { grid-template-columns: 1fr; gap: 50px; }
             .profile-frame { width: 70%; padding-top: 70%; margin: 0 auto; }
             .star-project { padding: 40px 25px; }
@@ -191,26 +119,26 @@
         <div class="splash splash-3"></div>
     </div>
 
-    <nav data-aos="fade-down" data-aos-duration="800">
+    <nav>
         <div class="nav-logo">KR.</div>
         <div class="nav-links">
             <a href="#about">About</a>
-            <a href="#work">Systems</a>
+            <a href="#work">Featured System</a>
             <a href="#experience">Experience</a>
             <a href="#contact">Connect</a>
         </div>
     </nav>
 
     <div id="hero" class="container">
-        <div data-aos="fade-up">
+        <div>
             <p class="hero-hello">👋 Hi there! I'm</p>
             <h1 class="hero-name">Keshani Rajkaran.</h1>
             <h2 class="hero-typed">I architect <span id="typed-text" class="highlight-text"></span></h2>
         </div>
-        <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 50px;" data-aos="fade-up" data-aos-delay="200">
-            A Systems Developer bridging the gap between complex raw data and vibrant strategic value. I build high-performance engines that look as good as they function.
+        <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 50px;">
+            A Systems Developer & Analyst bridging the gap between complex raw data and vibrant strategic value. I build high-performance engines that look as good as they function.
         </p>
-        <div data-aos="fade-up" data-aos-delay="300">
+        <div>
             <a href="#work" class="btn-vibrant">View Featured System ✨</a>
         </div>
     </div>
@@ -253,105 +181,4 @@
                 <h3 style="font-size: clamp(2rem, 4vw, 3rem); margin: 0; line-height: 1.1; color: var(--text-primary);">Seasonal Analytics Engine</h3>
                 <button onclick="openModal('seasonalModal')" class="btn-vibrant" style="padding: 1rem 2.5rem; font-size: 0.9rem;">
                     Explore Case Study 🚀
-                </button>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
-                <div class="vibrant-card">
-                    <h4>⚠️ THE PROBLEM</h4>
-                    <p style="color: var(--text-secondary);">Client relied on static, manual PDF reports to gauge seasonal performance. This caused major delays in labor allocation and untracked marketing ROI.</p>
-                </div>
-                <div class="vibrant-card" style="border-color: var(--electric-violet);">
-                    <h4 style="color: var(--electric-violet);">🛠️ MY SOLUTION</h4>
-                    <p style="color: var(--text-secondary);">I engineered a dynamic BI dashboard with multi-vector analysis (Volume, Efficiency, Retention) and automated Year-over-Year comparisons.</p>
-                </div>
-                <div class="vibrant-card" style="border-color: var(--radiant-cyan);">
-                    <h4 style="color: var(--radiant-cyan);">💎 THE OUTCOME</h4>
-                    <ul style="padding-left: 20px; color: var(--text-secondary);">
-                        <li><strong>300% Faster</strong> Reporting Cycle</li>
-                        <li><strong>Real-time</strong> Strategic Insights</li>
-                        <li><strong>Zero</strong> Invalid DB Queries</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="container">
-        <span class="section-tag" data-aos="fade-up">// CAREER TIMELINE</span>
-        <h2 class="section-title" data-aos="fade-up">My Journey <span class="highlight-text">So Far.</span></h2>
-        
-        <div style="margin-top: 60px; display: grid; gap: 30px;">
-            <div class="vibrant-card" data-aos="fade-left" style="border-left: 5px solid var(--neon-pink); border-radius: 15px;">
-                <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 15px;">
-                    <h3 style="margin: 0; font-size: 1.5rem;">Lead Systems Developer (Capstone)</h3>
-                    <span style="font-weight: 700; color: var(--neon-pink);">Jan 2025 - Present</span>
-                </div>
-                <h4 style="color: var(--text-secondary); margin-top: 0;">McKaylan Motor Engineering</h4>
-                <p style="color: var(--text-secondary);">Spearheading the complete digital transformation of a manual workshop into a cloud-ready ERP system. Architected 5 core sub-systems including real-time tracking and automated financials.</p>
-            </div>
-            <div class="vibrant-card" data-aos="fade-left" data-aos-delay="100" style="border-left: 5px solid var(--electric-violet); border-radius: 15px;">
-                <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 15px;">
-                    <h3 style="margin: 0; font-size: 1.5rem;">Forensic AI Strategy Analyst</h3>
-                    <span style="font-weight: 700; color: var(--electric-violet);">May 2025 - June 2025</span>
-                </div>
-                <h4 style="color: var(--text-secondary); margin-top: 0;">Grant Thornton China (Virtual)</h4>
-                <p style="color: var(--text-secondary);">Analyzed corporate data to recommend optimal AI/ML algorithms for fraud detection. Delivered high-impact strategic presentations to global senior leadership.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="container">
-        <div class="contact-box" data-aos="zoom-in">
-            <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 30px;">Let's Build Something <br>Extraordinary.</h2>
-            <p style="font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9;">Currently open for high-impact developer roles.</p>
-            <a href="mailto:rajkarankeshani4@gmail.com" class="email-link">rajkarankeshani4@gmail.com</a>
-            <div style="margin-top: 60px; font-size: 2.5rem;">
-                <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" style="color: white; margin: 0 25px; opacity: 0.8; transition: all 0.3s;"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/Keshani-Rajkaran" target="_blank" style="color: white; margin: 0 25px; opacity: 0.8; transition: all 0.3s;"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <div id="seasonalModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('seasonalModal')">&times;</span>
-            <span class="section-tag">// DEEP DIVE</span>
-            <h2 style="font-size: 3rem; margin: 0 0 30px 0; line-height: 1.1;">Enterprise Seasonal Analytics Engine</h2>
-            
-            <p style="font-size: 1.25rem; color: var(--text-secondary); line-height: 1.8;">
-                This wasn't just a coursework project; it was a critical business intervention. I identified that static reporting was costing hours in manual data crunching. I architected this solution to automate that entire cognitive load.
-            </p>
-            
-            <div style="margin: 50px 0; display: grid; gap: 25px;">
-                <div class="vibrant-card" style="padding: 30px; border-left: 5px solid var(--neon-pink);">
-                    <h3 style="color: var(--text-primary);"><i class="fas fa-history" style="color: var(--neon-pink); margin-right: 10px;"></i> "Time-Machine" Logic</h3>
-                    <p style="color: var(--text-secondary);">I implemented a sophisticated C# algorithm that runs parallel SQL queries for historical data, instantly calculating growth deltas and rendering them as **color-coded badges** (e.g., "📈 +12% YoY").</p>
-                </div>
-                <div class="vibrant-card" style="padding: 30px; border-left: 5px solid var(--electric-violet);">
-                    <h3 style="color: var(--text-primary);"><i class="fas fa-shield-alt" style="color: var(--electric-violet); margin-right: 10px;"></i> Operational Safety</h3>
-                    <p style="color: var(--text-secondary);">Engineered a two-stage validation modal that forces managers to review their scope before execution, preventing accidental high-load queries on the production DB.</p>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 50px;">
-                 <a href="https://github.com/Keshani-Rajkaran/Enterprise-Seasonal-Analytics-Reporting-System" target="_blank" class="btn-vibrant">
-                     View Full Source Code <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
-                 </a>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 800, once: true, offset: 80 });
-        var typed = new Typed('#typed-text', {
-            strings: ['vibrant enterprise systems.', 'intelligent dashboards.', 'robust backend solutions.', 'beautiful software.'],
-            typeSpeed: 50, backSpeed: 30, backDelay: 2000, loop: true
-        });
-        function openModal(id) { document.getElementById(id).style.display = "block"; document.body.style.overflow = "hidden"; }
-        function closeModal(id) { document.getElementById(id).style.display = "none"; document.body.style.overflow = "auto"; }
-        window.onclick = function(e) { if (e.target.classList.contains('modal')) closeModal('seasonalModal'); }
-    </script>
-</body>
-</html>
+                </
