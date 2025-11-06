@@ -3,364 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Keshani Rajkaran - Enterprise Software Engineer Portfolio">
-    <title>Keshani Rajkaran | Architecting Intelligence</title>
+    <meta name="description" content="Keshani Rajkaran - Systems Developer Portfolio">
+    <title>Keshani Rajkaran | Building Robust Systems</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-main: #0a192f;
-            --bg-secondary: #112240;
-            --accent: #64ffda;
-            --text-primary: #e6f1ff;
-            --text-secondary: #8892b0;
+            --bg-main: #030712;       /* Richer, darker black-blue */
+            --bg-secondary: #111827;   /* Card background */
+            --accent-primary: #8b5cf6; /* Vibrant Purple */
+            --accent-secondary: #06b6d4; /* Electric Cyan */
+            --text-bright: #f9fafb;
+            --text-muted: #9ca3af;
         }
 
         html { scroll-behavior: smooth; }
         body {
-            font-family: 'Calibre', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-main);
-            color: var(--text-primary);
+            color: var(--text-bright);
             margin: 0;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* UTILITIES */
-        .highlight { color: var(--accent); }
+        /* === THE "BAZINGA" AURORA BACKGROUND === */
+        .aurora-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
+            filter: blur(80px);
+        }
+
+        /* TYPOGRAPHY & UTILITIES */
+        h1, h2, h3, .logo { font-family: 'Outfit', sans-serif; }
+        .highlight { 
+            background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 100px 40px; }
         .section-header {
             display: flex;
             align-items: center;
-            margin-bottom: 40px;
-            width: 100%;
-            white-space: nowrap;
+            margin-bottom: 50px;
         }
         .section-header h2 {
-            font-size: clamp(26px, 5vw, 32px);
-            margin-right: 20px;
-            color: var(--text-primary);
+            font-size: clamp(30px, 5vw, 48px);
+            margin-right: 30px;
+            font-weight: 900; /* Extra bold for impact */
         }
         .section-header::after {
-            content: "";
-            display: block;
-            height: 1px;
-            width: 300px;
-            background-color: var(--text-secondary);
+            content: ""; flex: 1; height: 1px;
+            background: linear-gradient(90deg, var(--accent-primary), transparent);
             opacity: 0.3;
         }
-        .container { max-width: 1200px; margin: 0 auto; padding: 100px 50px; }
 
-        /* NAVIGATION */
+        /* NAVIGATION GLASS */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            background: rgba(10, 25, 47, 0.85);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 50px; position: fixed; width: 100%; top: 0; z-index: 100;
+            background: rgba(3, 7, 18, 0.7); /* Darker glass */
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             box-sizing: border-box;
         }
-        .logo { color: var(--accent); font-weight: bold; font-size: 1.5rem; letter-spacing: 1px; }
-        .nav-links a { color: var(--text-primary); text-decoration: none; margin-left: 30px; font-size: 0.9rem; font-family: monospace; }
-        .nav-links a:hover { color: var(--accent); }
-        .resume-btn { border: 1px solid var(--accent); color: var(--accent) !important; padding: 0.7rem 1rem; border-radius: 4px; transition: all 0.3s ease-in-out; }
-        .resume-btn:hover { background-color: rgba(100, 255, 218, 0.1); }
+        .logo { font-weight: 900; font-size: 1.5rem; letter-spacing: -1px; color: var(--text-bright); }
+        .nav-links a { 
+            color: var(--text-muted); text-decoration: none; margin-left: 40px; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; 
+        }
+        .nav-links a:hover { color: var(--accent-secondary); }
 
-        /* HERO */
-        #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-top: 0; }
-        .hero-intro { color: var(--accent); font-family: monospace; font-size: clamp(14px, 5vw, 16px); margin-bottom: 20px; }
-        .hero-name { font-size: clamp(40px, 8vw, 80px); font-weight: 600; color: var(--text-primary); line-height: 1.1; margin: 0; }
-        .hero-tagline { font-size: clamp(30px, 6vw, 70px); font-weight: 600; color: var(--text-secondary); line-height: 1.1; margin: 0 0 20px 0; }
-        .hero-desc { max-width: 540px; font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 50px; }
-        .cta-btn { color: var(--accent); background-color: transparent; border: 1px solid var(--accent); border-radius: 4px; padding: 1.25rem 1.75rem; font-size: 1rem; font-family: monospace; line-height: 1; text-decoration: none; cursor: pointer; transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1); display: inline-block; }
-        .cta-btn:hover { background-color: rgba(100, 255, 218, 0.1); box-shadow: 4px 4px 0 0 var(--accent); transform: translate(-5px, -5px); }
+        /* HERO SECTION */
+        #hero { min-height: 95vh; display: flex; flex-direction: column; justify-content: center; }
+        .hero-intro { color: var(--accent-secondary); font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 2px; margin-bottom: 25px; }
+        .hero-name {
+            font-size: clamp(50px, 10vw, 90px);
+            font-weight: 900;
+            line-height: 1;
+            margin: 0;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-tagline {
+            font-size: clamp(30px, 5vw, 60px);
+            font-weight: 700;
+            color: var(--text-muted);
+            line-height: 1.1;
+            margin: 10px 0 30px 0;
+        }
+        .hero-desc { max-width: 600px; font-size: 1.2rem; color: var(--text-muted); margin-bottom: 50px; }
+        
+        /* MODERN BUTTONS */
+        .btn-glow {
+            position: relative;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.4); /* Glowing effect on hover */
+            transform: scale(1.05);
+        }
 
-        /* EXPERIENCE TIMELINE */
-        .timeline { position: relative; max-width: 800px; }
-        .timeline::after { content: ''; position: absolute; width: 2px; background-color: var(--text-secondary); opacity: 0.2; top: 0; bottom: 0; left: 20px; margin-left: -1px; }
-        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 100%; box-sizing: border-box; }
-        .timeline-item::after { content: ''; position: absolute; width: 16px; height: 16px; right: -17px; background-color: var(--bg-main); border: 3px solid var(--accent); top: 15px; border-radius: 50%; z-index: 1; left: 12px; }
-        .timeline-content { padding: 20px 30px; background-color: var(--bg-secondary); position: relative; border-radius: 6px; box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7); transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1); }
-        .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -15px rgba(2,12,27,0.7); }
-        .timeline-date { color: var(--accent); font-family: monospace; font-size: 0.9rem; margin-bottom: 10px; display: inline-block; }
+        /* EXPERIENCE TIMELINE (Refined) */
+        .timeline { border-left: 2px solid rgba(139, 92, 246, 0.3); padding-left: 30px; margin-left: 10px; }
+        .timeline-item { position: relative; margin-bottom: 40px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -39px; top: 5px;
+            width: 16px; height: 16px; border-radius: 50%;
+            background: var(--bg-main); border: 3px solid var(--accent-primary);
+        }
+        .timeline-date { color: var(--accent-secondary); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* PROJECTS GRID */
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; position: relative; }
-        .project-card { background-color: var(--bg-secondary); padding: 2rem 1.75rem; border-radius: 6px; box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7); transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1); cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; height: 340px; }
-        .project-card:hover { transform: translateY(-10px); border-bottom: 3px solid var(--accent); }
-        .project-top { display: flex; justify-content: space-between; margin-bottom: 30px; }
-        .folder-icon { color: var(--accent); font-size: 40px; }
-        .project-links a { color: var(--text-secondary); font-size: 22px; margin-left: 15px; transition: color 0.3s; z-index: 2; position: relative; }
-        .project-links a:hover { color: var(--accent); }
-        .project-title { color: var(--text-primary); font-size: 1.4rem; margin: 0 0 10px 0; transition: color 0.3s; }
-        .project-card:hover .project-title { color: var(--accent); }
-        .project-description { color: var(--text-secondary); font-size: 1rem; }
-        .project-tech-list { display: flex; flex-wrap: wrap; padding: 0; margin: 20px 0 0 0; list-style: none; }
-        .project-tech-list li { color: var(--text-secondary); font-family: monospace; font-size: 0.8rem; margin-right: 15px; }
+        /* SUPERCHARGED PROJECT CARD */
+        .project-card {
+            background: linear-gradient(145deg, var(--bg-secondary), rgba(17, 24, 39, 0.5));
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.3);
+            transform: translateY(-5px);
+        }
+        /* The "PSO" Framework Tags */
+        .pso-tag {
+            display: inline-block;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-secondary);
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
 
-        /* SKILLS */
-        .skills-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 50px; }
-        .skill-category h3 { color: var(--accent); font-family: monospace; margin-bottom: 20px; }
-        ul.skills-list { display: grid; grid-template-columns: repeat(2, minmax(140px, 200px)); padding: 0; margin: 0; list-style: none; overflow: hidden; }
-        ul.skills-list li { position: relative; margin-bottom: 10px; padding-left: 20px; font-family: monospace; color: var(--text-secondary); }
-        ul.skills-list li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
+        /* BADGES */
+        .tech-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 0 8px 8px 0;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: var(--accent-secondary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
 
-        /* MODAL */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(10, 25, 47, 0.95); backdrop-filter: blur(5px); }
-        .modal-content { background-color: var(--bg-secondary); margin: 5% auto; padding: 40px; border: 1px solid var(--accent); border-radius: 8px; width: 80%; max-width: 900px; position: relative; color: var(--text-primary); animation: modalSlideUp 0.4s ease-out; }
+        /* CONTACT & MODAL */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(3, 7, 18, 0.95); backdrop-filter: blur(10px); }
+        .modal-content { background-color: var(--bg-secondary); margin: 5% auto; padding: 50px; border: 1px solid var(--accent-primary); border-radius: 16px; width: 80%; max-width: 900px; position: relative; color: var(--text-bright); animation: modalSlideUp 0.4s ease-out; }
         @keyframes modalSlideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .close-btn { color: var(--accent); float: right; font-size: 30px; font-weight: bold; cursor: pointer; }
-        .close-btn:hover { color: #fff; }
-        .modal-tech-tag { display: inline-block; border: 1px solid var(--accent); color: var(--accent); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-family: monospace; margin-right: 10px; margin-bottom: 10px; }
+        .close-btn { position:absolute; top: 20px; right: 30px; color: var(--text-muted); font-size: 40px; cursor: pointer; transition: color 0.3s; }
+        .close-btn:hover { color: var(--accent-primary); }
 
-        /* CONTACT */
-        #contact { text-align: center; max-width: 600px; margin: 0 auto 100px auto; }
-        .contact-title { font-size: clamp(40px, 5vw, 60px); font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
-        .contact-desc { color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 50px; }
-
-        /* MOBILE RESPONSIVENESS */
         @media (max-width: 768px) {
             .container { padding: 80px 25px; }
-            nav { padding: 15px 20px; flex-direction: column; gap: 15px; background: rgba(10, 25, 47, 0.98); }
-            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-            .nav-links a { margin-left: 0; font-size: 0.85rem; }
-            #about > div { grid-template-columns: 1fr !important; gap: 30px; }
-            .skills-container { grid-template-columns: 1fr; gap: 30px; }
-            .modal-content { width: 90%; margin: 20% auto; padding: 25px; }
-            .section-header::after { width: 100%; }
+            nav { padding: 15px 20px; flex-direction: column; gap: 15px; background: rgba(3, 7, 18, 0.95); }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 20px; }
+            .nav-links a { margin: 0; }
+            .project-card { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="aurora-bg"></div>
+
     <nav data-aos="fade-down" data-aos-duration="1000">
         <div class="logo">KR.</div>
         <div class="nav-links">
-            <a href="#about"><span class="highlight">01.</span> About</a>
-            <a href="#experience"><span class="highlight">02.</span> Experience</a>
-            <a href="#work"><span class="highlight">03.</span> Work</a>
-            <a href="#contact"><span class="highlight">04.</span> Contact</a>
-            <a href="#" class="resume-btn">Resume</a> </div>
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#work">Systems</a>
+            <a href="#contact">Contact</a>
+        </div>
     </nav>
 
     <div id="hero" class="container">
-        <div class="hero-intro" data-aos="fade-up" data-aos-delay="200">Hi, my name is</div>
-        <h1 class="hero-name" data-aos="fade-up" data-aos-delay="300">Keshani Rajkaran.</h1>
-        <h2 class="hero-tagline" data-aos="fade-up" data-aos-delay="400">I build <span id="typed-text" class="highlight"></span></h2>
-        <p class="hero-desc" data-aos="fade-up" data-aos-delay="500">
-            I am a results-driven software engineer and final-year BCom IST student. I specialize in bridging the gap between complex data and strategic business value through high-performance, full-stack enterprise applications.
+        <div class="hero-intro" data-aos="fade-up">HI, MY NAME IS</div>
+        <h1 class="hero-name" data-aos="fade-up" data-aos-delay="100">Keshani Rajkaran.</h1>
+        <h2 class="hero-tagline" data-aos="fade-up" data-aos-delay="200">I build <span id="typed-text" class="highlight"></span></h2>
+        <p class="hero-desc" data-aos="fade-up" data-aos-delay="300">
+            Systems Developer & Analyst focused on bridging the gap between raw data and strategic business value through high-performance enterprise applications.
         </p>
-        <div data-aos="fade-up" data-aos-delay="600">
-            <a href="#work" class="cta-btn">Check out my work</a>
+        <div data-aos="fade-up" data-aos-delay="400">
+            <a href="#work" class="btn-glow">View Selected Work</a>
         </div>
     </div>
 
     <section id="about" class="container" data-aos="fade-up">
-        <div class="section-header">
-            <h2><span class="highlight">01.</span> About Me</h2>
-        </div>
-        <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 50px;">
+        <div class="section-header"><h2>01. About Me</h2></div>
+        <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 60px;">
             <div>
-                <p style="color: var(--text-secondary); font-size: 1.1rem;">
-                    Hello! I'm Keshani, a developer with a unique blend of hard technical skills and strategic business acumen. My journey started with a fascination for how technology drives digital transformation, leading me to pursue a double major in <span class="highlight">Information Systems Technology</span> and <span class="highlight">Marketing</span> at UKZN.
+                <p style="color: var(--text-muted); font-size: 1.15rem;">
+                    I don't just write code; I engineer solutions to complex business problems. My passion lies in the intersection of <span class="highlight">Information Systems Technology</span> and strategic execution.
                 </p>
-                <p style="color: var(--text-secondary); font-size: 1.1rem;">
-                    I don't just write code; I solve business problems. Whether it's architecting ERP systems for real-world clients like <span class="highlight">McKaylan Motor Engineering</span> or developing AI fraud detection strategies for global firms, I focus on delivering measurable impact.
+                <p style="color: var(--text-muted); font-size: 1.15rem; margin-top: 20px;">
+                    Currently, I am leading the digital transformation for real-world clients like <span class="highlight">McKaylan Motor Engineering</span>, moving them from manual legacy processes to fully integrated, data-driven ERP cloud systems.
                 </p>
-                <p style="color: var(--text-secondary); font-size: 1.1rem;">
-                    Beyond the terminal, I've served as General Manager for the UKZN Marketing Society and was recognized as a Gold Award Winner in the Queen's Commonwealth Essay Competition, honing the communication skills necessary for high-level stakeholder engagement.
-                </p>
-                 <p style="color: var(--text-primary); font-size: 1.1rem; margin-top: 30px;">Here is my current technical arsenal:</p>
-                 <div class="skills-container">
-                    <div class="skill-category">
-                        <h3>▹ Core Technologies</h3>
-                        <ul class="skills-list">
-                            <li>C# .NET Framework</li>
-                            <li>SQL Server (T-SQL)</li>
-                            <li>JavaScript (ES6+)</li>
-                            <li>Python</li>
-                            <li>HTML5 & CSS3</li>
-                            <li>React.js</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3>▹ Tools & Methodologies</h3>
-                        <ul class="skills-list">
-                            <li>ASP.NET Web Forms</li>
-                            <li>Git & GitHub Enterprise</li>
-                            <li>Agile / Scrum</li>
-                            <li>Visual Studio</li>
-                            <li>Firebase</li>
-                            <li>Tailwind CSS</li>
-                        </ul>
-                    </div>
+                 <div style="margin-top: 40px;">
+                    <span class="tech-badge">C# .NET</span>
+                    <span class="tech-badge">SQL Server (T-SQL)</span>
+                    <span class="tech-badge">ASP.NET Web Forms</span>
+                    <span class="tech-badge">JavaScript (ES6+)</span>
+                    <span class="tech-badge">Chart.js Visualization</span>
+                    <span class="tech-badge">Agile / Scrum</span>
                  </div>
-            </div>
-            <div style="position: relative;">
-                <div style="width: 100%; height: 350px; background-color: var(--accent); opacity: 0.5; border-radius: 4px; position: absolute; top: 20px; left: 20px; z-index: -1; transition: all 0.3s;"></div>
-                <div style="width: 100%; height: 350px; background-color: #112240; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-family: monospace; border: 1px solid var(--accent);">
-                    [PHOTO UPLOAD PENDING]
-                </div>
             </div>
         </div>
     </section>
 
     <section id="experience" class="container" data-aos="fade-up">
-        <div class="section-header">
-            <h2><span class="highlight">02.</span> Where I've Worked</h2>
-        </div>
+        <div class="section-header"><h2>02. Experience</h2></div>
         <div class="timeline">
             <div class="timeline-item" data-aos="fade-left">
-                <div class="timeline-content">
-                    <span class="timeline-date">Jan 2025 - Present</span>
-                    <h3 style="color: var(--text-primary); margin: 0;">Lead Systems Analyst & Developer</h3>
-                    <h4 style="color: var(--accent); font-weight: normal; margin: 5px 0 20px 0;">McKaylan Motor Engineering (Capstone)</h4>
-                    <ul class="skills-list" style="grid-template-columns: 1fr;">
-                        <li>Leading the end-to-end digital transformation of a manual workshop into a fully integrated ASP.NET ERP system.</li>
-                        <li>Architected 5 modular sub-systems including real-time Appointment Tracking and automated Payment Processing.</li>
-                        <li>Engineered secure SQL Server databases supporting high-volume transaction processing.</li>
-                    </ul>
-                </div>
+                <span class="timeline-date">Jan 2025 - Present</span>
+                <h3 style="color: var(--text-bright); margin: 5px 0;">Lead Systems Developer & Analyst</h3>
+                <h4 style="color: var(--accent-primary); font-weight: normal; margin: 0 0 15px 0;">McKaylan Motor Engineering (Capstone)</h4>
+                <p style="color: var(--text-muted);">Spearheading the end-to-end architecture of a full-stack ERP system. Engineered secure SQL databases and modular .NET sub-systems for real-time appointment tracking and automated financial processing.</p>
             </div>
             <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
-                <div class="timeline-content">
-                    <span class="timeline-date">May 2025 - July 2025</span>
-                    <h3 style="color: var(--text-primary); margin: 0;">Full Stack Developer Trainee</h3>
-                    <h4 style="color: var(--accent); font-weight: normal; margin: 5px 0 20px 0;">FNB App Academy</h4>
-                    <ul class="skills-list" style="grid-template-columns: 1fr;">
-                        <li>Selected for intensive training focused on professional deployment competencies in FinTech.</li>
-                        <li>Developed advanced front-end solutions using React, Tailwind CSS, and Firebase.</li>
-                        <li>Led the full development lifecycle for 'Task Mate', a commercial-grade task management application.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
-                <div class="timeline-content">
-                    <span class="timeline-date">May 2025 - June 2025</span>
-                    <h3 style="color: var(--text-primary); margin: 0;">Forensic AI Strategy Analyst (Intern)</h3>
-                    <h4 style="color: var(--accent); font-weight: normal; margin: 5px 0 20px 0;">Grant Thornton China (Virtual)</h4>
-                    <ul class="skills-list" style="grid-template-columns: 1fr;">
-                        <li>Analyzed corporate data to recommend optimal AI/ML algorithms for enhanced fraud detection accuracy.</li>
-                        <li>Designed integration strategies to embed AI tools into core forensic investigation workflows.</li>
-                        <li>Delivered high-impact strategic presentations to senior global leadership.</li>
-                    </ul>
-                </div>
+                <span class="timeline-date">May 2025 - June 2025</span>
+                <h3 style="color: var(--text-bright); margin: 5px 0;">Forensic AI Strategy Analyst (Intern)</h3>
+                <h4 style="color: var(--accent-primary); font-weight: normal; margin: 0 0 15px 0;">Grant Thornton China (Virtual)</h4>
+                <p style="color: var(--text-muted);">Analyzed corporate datasets to recommend optimal AI/ML algorithms for fraud detection. Designed integration strategies to embed AI tools into core forensic investigation workflows.</p>
             </div>
         </div>
     </section>
 
     <section id="work" class="container" data-aos="fade-up">
-        <div class="section-header">
-            <h2><span class="highlight">03.</span> Featured Projects</h2>
-        </div>
+        <div class="section-header"><h2>03. Featured System</h2></div>
         
-        <div class="project-grid">
-            <div class="project-card" onclick="openModal('seasonalModal')">
-                <div class="project-top">
-                    <i class="far fa-folder folder-icon"></i>
-                    <div class="project-links">
-                        <a href="https://github.com/Keshani-Rajkaran/Enterprise-Seasonal-Analytics-Reporting-System" target="_blank" onclick="event.stopPropagation()" title="View Source"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
+        <div class="project-card" onclick="openModal('seasonalModal')">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px;">
                 <div>
-                    <h3 class="project-title">Enterprise Seasonal Analytics Engine</h3>
-                    <div class="project-description">
-                        A multi-modal Business Intelligence dashboard. It transforms raw ERP data into strategic insights on operational volume, staff efficiency, and client retention with real-time YoY comparisons.
-                    </div>
+                    <span style="color: var(--accent-secondary); font-family:'Outfit'; font-weight:700; letter-spacing:1px;">ENTERPRISE MODULE</span>
+                    <h3 style="font-size: 2rem; margin: 10px 0; color: var(--text-bright);">Seasonal Analytics & Intelligence Engine</h3>
                 </div>
-                <ul class="project-tech-list">
-                    <li>C# .NET</li>
-                    <li>ASP.NET</li>
-                    <li>SQL Server</li>
-                    <li>Chart.js</li>
-                </ul>
+                <i class="fas fa-external-link-alt" style="color: var(--accent-primary); font-size: 1.5rem;"></i>
             </div>
 
-            <div class="project-card" style="opacity: 0.8; cursor: default;">
-                <div class="project-top">
-                    <i class="far fa-folder folder-icon" style="color: var(--text-secondary);"></i>
-                </div>
-                <div>
-                    <h3 class="project-title" style="color: var(--text-secondary);">McKaylan ERP System (Full)</h3>
-                    <div class="project-description">
-                        The complete enterprise resource planning system. Features role-based authentication, inventory management, and automated scheduling.
-                    </div>
-                </div>
-                <ul class="project-tech-list">
-                    <li>ASP.NET</li>
-                    <li>C#</li>
-                    <li>MSSQL</li>
-                    <li>Bootstrap</li>
-                </ul>
+            <div style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">
+                <span class="pso-tag">The Problem:</span>
+                Management relied on static, manual reports to gauge seasonal performance, leading to inefficient labor allocation and untracked marketing ROI.
+                <br><br>
+                <span class="pso-tag" style="color: var(--text-bright);">The Solution:</span>
+                Engineered a dynamic ASP.NET BI system with multi-vector analysis (Volume, Efficiency, Retention), automated YoY comparisons, and two-stage operational safety protocols.
             </div>
 
-             <div class="project-card" style="opacity: 0.8; cursor: default;">
-                <div class="project-top">
-                    <i class="far fa-folder folder-icon" style="color: var(--text-secondary);"></i>
-                </div>
-                <div>
-                    <h3 class="project-title" style="color: var(--text-secondary);">Task Mate React App</h3>
-                    <div class="project-description">
-                        A modern, responsive task management application built during the FNB App Academy, featuring real-time updates and dynamic routing.
-                    </div>
-                </div>
-                <ul class="project-tech-list">
-                    <li>React.js</li>
-                    <li>Firebase</li>
-                    <li>Tailwind CSS</li>
-                </ul>
+            <div style="margin-top: 40px;">
+                <span class="tech-badge">C# .NET</span>
+                <span class="tech-badge">ASP.NET</span>
+                <span class="tech-badge">MSSQL</span>
+                <span class="tech-badge">Chart.js</span>
+                <span class="tech-badge">ADO.NET</span>
             </div>
-
         </div>
     </section>
 
-    <section id="contact" class="container" data-aos="fade-up">
-        <div style="margin-top: 100px;">
-            <p style="color: var(--accent); font-family: monospace;">04. What's Next?</p>
-            <h2 class="contact-title">Get In Touch</h2>
-            <p class="contact-desc">
-                I am actively seeking opportunities to contribute to innovative development teams. If you have a challenging project or a role that fits my skill set, my inbox is always open.
-            </p>
-            <a href="mailto:rajkarankeshani4@gmail.com" class="cta-btn">Say Hello</a>
-            <div style="margin-top: 50px; font-size: 2rem;">
-                <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" style="color: var(--text-secondary); margin: 0 20px; transition: color 0.3s;"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/Keshani-Rajkaran" target="_blank" style="color: var(--text-secondary); margin: 0 20px; transition: color 0.3s;"><i class="fab fa-github"></i></a>
-            </div>
+    <section id="contact" class="container" data-aos="fade-up" style="text-align: center; margin-top: 100px;">
+        <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 20px;">Let's Connect</h2>
+        <p style="color: var(--text-muted); font-size: 1.3rem; max-width: 600px; margin: 0 auto 40px auto;">
+            I am currently open to opportunities where I can contribute to innovative, high-performance development teams.
+        </p>
+        <a href="mailto:rajkarankeshani4@gmail.com" class="btn-glow" style="font-size: 1.2rem;">
+            <i class="far fa-envelope"></i> rajkarankeshani4@gmail.com
+        </a>
+        <div style="margin-top: 60px; font-size: 2rem;">
+            <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" style="color: var(--text-muted); margin: 0 20px; transition: all 0.3s;"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Keshani-Rajkaran" target="_blank" style="color: var(--text-muted); margin: 0 20px; transition: all 0.3s;"><i class="fab fa-github"></i></a>
         </div>
     </section>
 
     <div id="seasonalModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('seasonalModal')">&times;</span>
-            <h2 style="color: var(--text-primary); margin-bottom: 20px;">Enterprise Seasonal Analytics Engine</h2>
-            <div style="margin-bottom: 30px;">
-                <span class="modal-tech-tag">C#</span>
-                <span class="modal-tech-tag">ASP.NET</span>
-                <span class="modal-tech-tag">SQL Server</span>
-                <span class="modal-tech-tag">Chart.js</span>
-                <span class="modal-tech-tag">ADO.NET</span>
-            </div>
-            <p style="color: var(--text-secondary); font-size: 1.1rem;">
-                This module was architected as a high-impact Business Intelligence (BI) upgrade for the McKaylan Motor Engineering ERP. It replaces static, manual reporting with a dynamic engine that transforms raw operational data into actionable strategic insights.
+            <h2 style="color: var(--accent-secondary); margin-bottom: 25px; font-size: 2.5rem;">Enterprise Analytics Engine</h2>
+            
+            <p style="color: var(--text-bright); font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
+                This module was architected as a high-impact Business Intelligence (BI) upgrade for the McKaylan Motor Engineering ERP. It replaces legacy manual reporting with a real-time, dynamic engine that transforms raw operational data into actionable strategic insights.
             </p>
-            <h3 style="color: var(--text-primary); margin-top: 30px;">Key Engineered Features:</h3>
-            <ul style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 30px;">
-                <li>✅ <strong>Multi-Vector Analysis:</strong> Simultaneous reporting on Operational Volume, Workforce Efficiency, and Client Retention.</li>
-                <li>✅ <strong>"Time-Machine" Logic:</strong> Automated Year-over-Year comparisons with instant growth/decline badges.</li>
-                <li>✅ <strong>Operational Safety:</strong> Engineered a two-stage validation protocol to protect the production database from high-load invalid queries.</li>
-            </ul>
-            <div style="text-align: right; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-                 <a href="https://github.com/Keshani-Rajkaran/Enterprise-Seasonal-Analytics-Reporting-System" target="_blank" class="cta-btn" style="font-size: 0.9rem; padding: 12px 25px;">
-                     <i class="fab fa-github"></i> View Full Source Code & Documentation
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.2);">
+                    <h3 style="color: var(--accent-primary); margin-bottom: 15px;"><i class="fas fa-chart-line"></i> Multi-Vector Analysis</h3>
+                    <p style="color: var(--text-muted);">Simultaneous, stacked reporting on Operational Volume, Workforce Efficiency, and Client Retention rates.</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; border: 1px solid rgba(6, 182, 212, 0.2);">
+                    <h3 style="color: var(--accent-secondary); margin-bottom: 15px;"><i class="fas fa-history"></i> "Time-Machine" Logic</h3>
+                    <p style="color: var(--text-muted);">Automated Year-over-Year (YoY) comparative algorithms with instant growth/decline visualization.</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.2);">
+                    <h3 style="color: var(--accent-primary); margin-bottom: 15px;"><i class="fas fa-shield-alt"></i> Operational Safety</h3>
+                    <p style="color: var(--text-muted);">Engineered two-stage validation protocols to protect production databases from invalid high-load queries.</p>
+                </div>
+            </div>
+
+            <div style="text-align: right; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
+                 <a href="https://github.com/Keshani-Rajkaran/Enterprise-Seasonal-Analytics-Reporting-System" target="_blank" class="btn-glow">
+                     View Source Code & Documentation <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
                  </a>
             </div>
         </div>
@@ -368,14 +336,14 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true, offset: 50 });
+        AOS.init({ duration: 1000, once: true });
         var typed = new Typed('#typed-text', {
-            strings: ['intelligent enterprise systems.', 'robust backend solutions.', 'data-driven dashboards.', 'scalable software.'],
-            typeSpeed: 50, backSpeed: 30, backDelay: 1500, loop: true
+            strings: ['intelligent enterprise systems.', 'robust backend solutions.', 'data-driven dashboards.', 'scalable software architecture.'],
+            typeSpeed: 40, backSpeed: 20, backDelay: 2000, loop: true
         });
-        function openModal(modalId) { document.getElementById(modalId).style.display = "block"; document.body.style.overflow = "hidden"; }
-        function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; document.body.style.overflow = "auto"; }
-        window.onclick = function(event) { if (event.target.classList.contains('modal')) { event.target.style.display = "none"; document.body.style.overflow = "auto"; } }
+        function openModal(id) { document.getElementById(id).style.display = "block"; document.body.style.overflow = "hidden"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; document.body.style.overflow = "auto"; }
+        window.onclick = function(e) { if (e.target.classList.contains('modal')) closeModal('seasonalModal'); }
     </script>
 </body>
 </html>
