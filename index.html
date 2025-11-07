@@ -1,15 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Keshani Rajkaran — Systems Analyst & Developer</title>
 
-  <!-- Tailwind CSS CDN -->
+  <!--
+    FIX: Load Tailwind CSS CDN *first*
+    The `tailwind` object must be defined before we can set `tailwind.config`.
+  -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Framer Motion CDN -->
-  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+  <!-- Define Tailwind colors *after* loading the script -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            // Your requested accent colors
+            gold: '#D4AF37',   // Rich, classic gold
+            pinky: '#EC4899',  // Vibrant, modern pink
+            
+            // Background colors
+            darkbg: '#050505',
+            lightbg: '#0f0f0f',
+          },
+          boxShadow: {
+            // Custom glows for cards
+            'glow-gold': '0 0 15px 5px rgba(212, 175, 55, 0.2)',
+            'glow-pink': '0 0 15px 5px rgba(236, 72, 153, 0.2)',
+          }
+        }
+      }
+    }
+  </script>
 
   <!-- Lottie -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
@@ -18,176 +42,686 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Inter', sans-serif; background: #050505; color: #fff; margin: 0; }
+    /* Base styles */
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #050505; 
+      color: #fff; 
+      margin: 0; 
+    }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
-    .section { padding: 5rem 1.5rem; max-width: 1200px; margin: auto; }
-    .card { background: #0f0f0f; border: 1px solid rgba(255,255,255,0.05); border-radius: 1rem; padding: 1.5rem; }
-    .typewriter { color: #D4AF37; font-family: 'JetBrains Mono', monospace; font-size: 1.125rem; }
-    a { text-decoration: none; }
+    
+    /* Section padding */
+    .section { 
+      padding: 6rem 1.5rem; /* Increased padding */
+      max-width: 1200px; 
+      margin: auto; 
+    }
+    
+    /* Base card style */
+    .card { 
+      background: #0f0f0f; 
+      border: 1px solid rgba(255,255,255,0.05); 
+      border-radius: 1rem; 
+      padding: 1.5rem; 
+      transition: all 0.3s ease-in-out; /* Smooth transition for all properties */
+    }
+
+    /* Card hover effects */
+    .card:hover {
+      transform: translateY(-5px); /* Subtle lift */
+      border-color: rgba(212, 175, 55, 0.5); /* Gold border highlight */
+      box-shadow: var(--tw-shadow-glow-gold); /* Gold glow */
+    }
+    
+    .specialty-card:hover {
+      border-color: rgba(236, 72, 153, 0.5); /* Pink border highlight */
+      box-shadow: var(--tw-shadow-glow-pink); /* Pink glow */
+    }
+    
+    /* Link hover effect */
+    nav a:hover, .footer-link:hover {
+      color: #D4AF37; /* Gold */
+    }
+
+    /* Button hover effect */
+    .btn-hover {
+      transition: all 0.2s ease-in-out;
+    }
+    .btn-hover:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Softer shadow */
+    }
+
+    /* Page/Section transition animation (ENHANCED) */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98); /* Added scale */
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      will-change: opacity, transform; /* Performance boost */
+    }
+    
+    .fade-in-section.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* --- "CSS Bazinga" Illustrations (Background Glows) --- */
+    .blur-glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background-image: radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, rgba(236, 72, 153, 0) 70%);
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: -1;
+      animation: pulse-glow 8s infinite alternate;
+    }
+    
+    .blur-glow.gold {
+      background-image: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0) 70%);
+    }
+
+    @keyframes pulse-glow {
+      from { transform: scale(0.8) translate(10px, -20px); opacity: 0.7; }
+      to { transform: scale(1.2) translate(-10px, 20px); opacity: 1; }
+    }
+
+    /* --- "CSS Bazinga" Animated Header Border --- */
+    .animated-header {
+      position: relative;
+      overflow: hidden; /* Hide overflow from pseudo-element */
+    }
+    .animated-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(236, 72, 153, 0.8), /* Pinky */
+        rgba(212, 175, 55, 0.8),  /* Gold */
+        transparent
+      );
+      animation: move-gradient 5s linear infinite;
+    }
+
+    @keyframes move-gradient {
+      0% { background-position-x: -100%; }
+      100% { background-position-x: 100%; }
+    }
+
+
+    /* --- Experience Timeline Styles --- */
+    .timeline-container {
+      position: relative;
+      max-width: 60rem; /* 960px */
+      margin: 0 auto;
+    }
+
+    /* The vertical timeline bar */
+    .timeline-container::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+
+    /* Timeline item container */
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+    }
+
+    /* The timeline dot */
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -10px;
+      background-color: #0f0f0f;
+      border: 4px solid #D4AF37; /* Gold */
+      top: 1.5rem; /* Align with card top padding */
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    /* Alternate dot for pink */
+    .timeline-item.pink::after {
+      border-color: #EC4899; /* Pink */
+    }
+
+    /* Position items to the left */
+    .timeline-left {
+      left: 0;
+    }
+
+    /* Position items to the right */
+    .timeline-right {
+      left: 50%;
+    }
+
+    /* Content card for the timeline */
+    .timeline-content {
+      padding: 1.5rem;
+      background: #0f0f0f;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 1rem;
+      position: relative;
+      transition: all 0.3s ease-in-out;
+    }
+    
+    /* Add hover effect to timeline cards */
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      border-color: rgba(212, 175, 55, 0.5);
+      box-shadow: var(--tw-shadow-glow-gold);
+    }
+    
+    .timeline-item.pink .timeline-content:hover {
+      border-color: rgba(236, 72, 153, 0.5);
+      box-shadow: var(--tw-shadow-glow-pink);
+    }
+
+
+    /* Mobile styles for timeline */
+    @media screen and (max-width: 768px) {
+      .timeline-container::after {
+        left: 20px; /* Move line to the left */
+      }
+      
+      .timeline-item {
+        width: 100%;
+        padding-left: 50px; /* Space for line and dot */
+        padding-right: 15px;
+      }
+      
+      .timeline-item::after {
+        left: 10px; /* Position dot on the line */
+      }
+
+      /* Both left and right items are on the right side */
+      .timeline-left,
+      .timeline-right {
+        left: 0%;
+      }
+    }
+    
+    /* --- REMOVED: Old Animated Headline Styles --- */
+    /* .animated-headline-container, .static-text, .dynamic-text-wrapper, etc. removed */
+    /* @keyframes text-fade removed */
+
+    /* --- NEW: Clean Typewriter Style --- */
+    #typewriter-hero {
+      min-height: 2.5rem; /* prevent layout shift */
+      border-right: 2px solid rgba(212, 175, 55, 0.75); /* Blinking caret */
+      animation: blink-caret 0.75s step-end infinite;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: rgba(212, 175, 55, 0.75); }
+    }
+    
   </style>
 </head>
-<body>
+<body class="bg-darkbg">
 
 <!-- HEADER -->
-<header class="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur border-b border-white/5">
+<header class="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur border-b border-white/5 animated-header">
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <div class="font-bold text-white">Keshani Rajkaran</div>
+    <div class="font-bold text-white text-lg">Keshani Rajkaran</div>
     <nav class="hidden md:flex gap-6 items-center text-sm text-neutral-300">
-      <a href="#about">About</a>
-      <a href="#projects">My Work</a>
-      <a href="#specialties">Specialties</a>
-      <a href="#resume">Experience</a>
-      <a href="#contact" class="text-black bg-gold px-3 py-2 rounded">Contact</a>
-      <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" class="pl-2">LinkedIn</a>
+      <a href="#about" class="transition-colors">About</a>
+      <a href="#specialties" class="transition-colors">Specialties</a>
+      <a href="#projects" class="transition-colors">My Work</a>
+      <a href="#resume" class="transition-colors">Experience</a>
+      <a href="#contact" class="text-black bg-gold px-4 py-2 rounded-lg font-semibold btn-hover">Contact</a>
+      <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" class="pl-2 transition-colors">LinkedIn</a>
     </nav>
+    <!-- Mobile Menu Button (optional) -->
+    <div class="md:hidden">
+      <!-- You can add a mobile menu hamburger icon here -->
+    </div>
   </div>
 </header>
 
-<!-- HERO -->
-<section id="hero" class="section grid md:grid-cols-2 gap-8 items-center pt-28">
-  <div>
-    <div class="font-mono text-pinky mb-2">SYSTEMS ANALYST & DEVELOPER</div>
-    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Hi, I’m Keshani Rajkaran</h1>
-    <div class="text-neutral-300 mt-2 font-semibold">Software Developer</div>
-    <div class="mt-6 typewriter" id="typewriter"></div>
-    <p class="text-neutral-400 mt-6 max-w-2xl">I deliver production-grade systems and data-driven dashboards that provide operational clarity. I focus on reliability, security and measurable impact.</p>
-    <div class="mt-6 flex gap-3">
-      <a href="#projects" class="bg-gold text-black px-4 py-2 rounded font-semibold">View Work</a>
-      <a href="#contact" class="border border-white/10 px-4 py-2 rounded text-neutral-200">Contact</a>
-    </div>
-  </div>
-  <div id="lottie-avatar" class="w-full max-w-[300px] mx-auto"></div>
-</section>
+<main>
 
-<!-- ABOUT -->
-<section id="about" class="section">
-  <h2 class="text-2xl font-semibold">Core competencies</h2>
-  <p class="text-neutral-400 mt-2 max-w-2xl">Direct delivery: high-availability systems, secure data access, and dashboards that drive decisions.</p>
-  <div class="grid md:grid-cols-3 gap-6 mt-6">
-    <div class="card">
-      <div class="font-semibold">Systems / Integration</div>
-      <div class="text-neutral-400 mt-2 text-sm">Modular services, APIs, and reliable integrations for enterprise workflows.</div>
-      <div class="flex gap-2 flex-wrap mt-4">
-        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Microservices</span>
-        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">APIs</span>
+  <!-- HERO -->
+  <section id="hero" class="section grid md:grid-cols-2 gap-12 items-center pt-32 md:pt-40 fade-in-section relative overflow-hidden">
+    <!-- Background Glow Illustration -->
+    <div class="blur-glow pink" style="top: 10%; left: -50px; opacity: 0.5;"></div>
+    
+    <div class="z-10"> <!-- Ensure content is above glow -->
+      <div class="font-mono text-pinky mb-2 font-semibold">SYSTEMS ANALYST & DEVELOPER</div>
+
+      <!-- REBUILT: Animated Headline -->
+      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-white mb-4">Hi, I'm Keshani.</h1>
+      <div class="text-2xl md:text-3xl font-mono text-gold h-10" id="typewriter-hero"></div>
+      <!-- END REBUILT: Animated Headline -->
+
+      <div class="text-neutral-300 mt-4 font-semibold">Software Developer</div>
+      
+      <p class="text-neutral-400 mt-6 max-w-2xl">
+        I deliver production-grade systems and data-driven dashboards that provide operational clarity. I focus on reliability, security and measurable impact.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="#projects" class="bg-gold text-black px-6 py-3 rounded-lg font-semibold btn-hover">View Work</a>
+        <a href="#resume" class="bg-pinky text-white px-6 py-3 rounded-lg font-semibold btn-hover">My Experience</a>
+        <a href="#contact" class="border border-white/10 px-6 py-3 rounded-lg text-neutral-200 btn-hover">Contact</a>
       </div>
     </div>
-    <div class="card">
-      <div class="font-semibold">Data Engineering</div>
-      <div class="text-neutral-400 mt-2 text-sm">SQL optimization, ETL pipelines and secure access to data.</div>
-      <div class="flex gap-2 flex-wrap mt-4">
-        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">T-SQL</span>
-        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">MSSQL</span>
+    <!-- 
+      FIX: Removed "hidden" class to make Lottie visible on mobile,
+      filling the "blank" space you mentioned.
+    -->
+    <div class="relative z-0 block"> <!-- Container for Lottie and its glow -->
+      <!-- Background Glow for Lottie -->
+      <div class="blur-glow gold" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px; animation-duration: 10s;"></div>
+      <div id="lottie-avatar" class="w-full max-w-[400px] mx-auto relative z-10"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section fade-in-section">
+    <h2 class="text-3xl font-semibold text-white">Core Competencies</h2>
+    <p class="text-neutral-400 mt-2 max-w-2xl text-lg">Direct delivery: high-availability systems, secure data access, and dashboards that drive decisions.</p>
+    <div class="grid md:grid-cols-3 gap-6 mt-8">
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="font-semibold text-lg text-pinky">Systems / Integration</div>
+        <div class="text-neutral-400 mt-2 text-sm">Modular services, APIs, and reliable integrations for enterprise workflows.</div>
+        <div class="flex gap-2 flex-wrap mt-4">
+          <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Microservices</span>
+          <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">APIs</span>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="font-semibold text-lg text-gold">Data Engineering</div>
+        <div class="text-neutral-400 mt-2 text-sm">SQL optimization, ETL pipelines and secure access to data.</div>
+        <div class="flex gap-2 flex-wrap mt-4">
+          <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">T-SQL</span>
+          <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">MSSQL</span>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="font-semibold text-lg text-white">Dashboards & BI</div>
+        <div class="text-neutral-400 mt-2 text-sm">Clear dashboards for operations and executive KPIs.</div>
+        <div class="flex gap-2 flex-wrap mt-4">
+          <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Chart.js</span>
+          <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Data Viz</span>
+        </div>
       </div>
     </div>
-    <div class="card">
-      <div class="font-semibold">Dashboards & BI</div>
-      <div class="text-neutral-400 mt-2 text-sm">Clear dashboards for operations and executive KPIs.</div>
-      <div class="flex gap-2 flex-wrap mt-4">
-        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Chart.js</span>
-        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Data viz</span>
+  </section>
+
+  <!-- SPECIALTIES -->
+  <section id="specialties" class="section fade-in-section">
+    <h2 class="text-3xl font-semibold text-white">Specialties</h2>
+    <p class="text-neutral-400 mt-2 max-w-2xl text-lg">Practical outcomes — what I can deliver for your team or project.</p>
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+      <div class="card specialty-card text-center p-6">
+        <div class="font-semibold text-white">Production Services</div>
+        <small class="text-neutral-400 block mt-1">Build and maintain backend services.</small>
+      </div>
+      <div class="card specialty-card text-center p-6">
+        <div class="font-semibold text-white">Data Pipelines</div>
+        <small class="text-neutral-400 block mt-1">Reliable ETL and streaming pipelines.</small>
+      </div>
+      <div class="card specialty-card text-center p-6">
+        <div class="font-semibold text-white">Dashboarding</div>
+        <small class="text-neutral-400 block mt-1">Real-time dashboards for KPIs.</small>
+      </div>
+      <div class="card specialty-card text-center p-6">
+        <div class="font-semibold text-white">Consultation</div>
+        <small class="text-neutral-400 block mt-1">Pragmatic improvements for legacy systems.</small>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SPECIALTIES -->
-<section id="specialties" class="section">
-  <h2 class="text-2xl font-semibold">Specialties</h2>
-  <p class="text-neutral-400 mt-2 max-w-2xl">Practical outcomes — what I can deliver for your team or project.</p>
-  <div class="grid md:grid-cols-4 gap-4 mt-6">
-    <div class="card">Production Services<br><small>Build and maintain backend services.</small></div>
-    <div class="card">Data pipelines<br><small>Reliable ETL and streaming pipelines.</small></div>
-    <div class="card">Dashboarding<br><small>Real-time dashboards for KPIs.</small></div>
-    <div class="card">Consultation<br><small>Pragmatic improvements for legacy systems.</small></div>
-  </div>
-</section>
+  <!-- PROJECTS -->
+  <section id="projects" class="section fade-in-section">
+    <h2 class="text-3xl font-semibold text-white">My Projects / Work</h2>
+    
+    <!-- Main Project Showcase -->
+    <div class="grid grid-cols-1 gap-6 mt-8">
+      <div class="card p-6 md:p-8 border border-gold/30 shadow-glow-gold">
+        
+        <!-- Project Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between">
+          <h3 class="text-2xl font-semibold text-gold">Seasonal Analytics Reporting System</h3>
+          <div class="flex gap-4 mt-4 md:mt-0">
+            <!-- NEW: Video Modal Button -->
+            <button id="open-modal-btn" 
+               class="inline-block bg-pinky text-white px-4 py-2 rounded-lg font-mono text-sm hover:bg-pinky/80 transition-colors btn-hover">
+              Watch Demo &rarr;
+            </button>
+            <a href="https://github.com/Keshani-Rajkaran/Enterprise-Seasonal-Analytics-Reporting-System" target="_blank" rel="noopener noreferrer" 
+               class="inline-block bg-white/10 text-white px-4 py-2 rounded-lg font-mono text-sm hover:bg-white/20 transition-colors btn-hover">
+              View on GitHub &rarr;
+            </a>
+          </div>
+        </div>
+        <p class="text-pinky font-mono text-sm mt-2">High-Impact Business Intelligence Upgrade for McKaylan Motor Engineering</p>
 
-<!-- PROJECTS -->
-<section id="projects" class="section">
-  <h2 class="text-2xl font-semibold">My Projects / Work</h2>
-  <div class="grid md:grid-cols-2 gap-6 mt-6">
-    <a href="https://github.com/Keshani-Rajkaran/Enterprise-Seasonal-Analytics-Reporting-System" target="_blank" class="card hover:scale-105 transition-transform">
-      <div class="font-semibold text-lg">Seasonal Analytics Engine</div>
-      <div class="text-neutral-400 mt-2">Automated YoY reporting, integrated into ERP with real-time dashboards.</div>
-      <div class="flex gap-2 flex-wrap mt-4">
-        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">C#</span>
-        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">ASP.NET</span>
-        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">MSSQL</span>
+        <div class="grid md:grid-cols-2 gap-6 mt-6">
+          
+          <!-- Left Column: Problem & Solution -->
+          <div class="space-y-6">
+            <div>
+              <h4 class="font-semibold text-lg text-white mb-2">The Problem</h4>
+              <p class="text-neutral-400 text-sm leading-relaxed">
+                Previously, management relied on static, single-dimensional reports to gauge seasonal performance. This resulted in missed opportunities for optimizing labor allocation and marketing spend.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-lg text-white mb-2">The Solution</h4>
+              <p class="text-neutral-400 text-sm leading-relaxed">
+                A dynamic, multi-vector analytics system that transforms raw operational data into actionable strategic insights in real-time. It allows leadership to simultaneously track operational demand, workforce efficiency, and client acquisition trends through a secure, unified dashboard.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Column: Tech Architecture -->
+          <div>
+            <h4 class="font-semibold text-lg text-white mb-3">Technical Architecture</h4>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <span class="text-xs font-mono px-2 py-1 bg-pinky/20 text-pinky rounded mr-2">Core</span>
+                <span class="text-neutral-300 text-sm">ASP.NET Web Forms (.NET Framework 4.8)</span>
+              </li>
+              <li class="flex items-center">
+                <span class="text-xs font-mono px-2 py-1 bg-white/10 text-white rounded mr-2">Language</span>
+                <span class="text-neutral-300 text-sm">C# (with modern pattern matching)</span>
+              </li>
+              <li class="flex items-center">
+                <span class="text-xs font-mono px-2 py-1 bg-gold/20 text-gold rounded mr-2">Database</span>
+                <span class="text-neutral-300 text-sm">MS SQL Server (via secure ADO.NET)</span>
+              </li>
+              <li class="flex items-center">
+                <span class="text-xs font-mono px-2 py-1 bg-white/10 text-white rounded mr-2">Security</span>
+                <span class="text-neutral-300 text-sm">Parameterized `SqlCommand` (prevents SQLi)</span>
+              </li>
+              <li class="flex items-center">
+                <span class="text-xs font-mono px-2 py-1 bg-white/10 text-white rounded mr-2">Frontend</span>
+                <span class="text-neutral-300 text-sm">HTML5/CSS3, JavaScript & Chart.js</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
       </div>
-    </a>
-  </div>
-</section>
+    </div>
+  </section>
 
-<!-- TIMELINE -->
-<section id="resume" class="section">
-  <h2 class="text-2xl font-semibold">Experience</h2>
-  <div class="space-y-4 mt-6">
-    <div class="card">
-      <div class="text-sm font-mono text-neutral-400">Jan 2025 – Present</div>
-      <div class="font-semibold mt-1">Lead Systems Developer — McKaylan Motor Engineering</div>
-      <div class="text-neutral-400 mt-2">Digital transformation to cloud-ready ERP with modular subsystems.</div>
-    </div>
-    <div class="card">
-      <div class="text-sm font-mono text-neutral-400">Expected Graduation: 2025</div>
-      <div class="font-semibold mt-1">BCom Information Systems Technology — University of KwaZulu-Natal</div>
-      <div class="text-neutral-400 mt-2">Systems analysis, database design, and software development coursework.</div>
-    </div>
-  </div>
-</section>
+  <!-- TIMELINE -->
+  <section id="resume" class="section fade-in-section relative overflow-hidden">
+    <!-- Background Glow Illustration -->
+    <div class="blur-glow gold" style="top: 20%; right: -100px; opacity: 0.4;"></div>
 
-<!-- CONTACT -->
-<section id="contact" class="section">
-  <h2 class="text-2xl font-semibold">Contact</h2>
-  <p class="text-neutral-400 mt-2 max-w-2xl">Reach me at <strong>rajkarankeshani4@gmail.com</strong> or use the form below.</p>
-  <div class="mt-6 grid md:grid-cols-2 gap-6">
-    <div class="card">
-      <div class="font-semibold">LinkedIn</div>
-      <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" class="text-neutral-400 mt-2 block">www.linkedin.com/in/keshani-rajkaran-0487bb1b0</a>
-      <div class="mt-4 font-semibold">Location</div>
-      <div class="text-neutral-400">Durban, South Africa</div>
+    <h2 class="text-3xl font-semibold text-white text-center">Experience & Education</h2>
+    
+    <div class="timeline-container mt-12">
+      
+      <!-- Timeline Item 1 -->
+      <div class="timeline-item timeline-left">
+        <div class="timeline-content">
+          <div class="text-sm font-mono text-neutral-400">Jan 2025 – Present</div>
+          <div class="font-semibold text-lg mt-1 text-gold">Lead Systems Developer</div>
+          <div class="font-medium text-neutral-300">McKaylan Motor Engineering</div>
+          <div class="text-neutral-400 mt-2 text-sm">Leading digital transformation to a cloud-ready ERP with modular subsystems, enhancing operational efficiency.</div>
+        </div>
+      </div>
+
+      <!-- Timeline Item 2 -->
+      <div class="timeline-item timeline-right pink">
+        <div class="timeline-content">
+          <div class="text-sm font-mono text-neutral-400">Expected Graduation: 2025</div>
+          <div class="font-semibold text-lg mt-1 text-pinky">BCom Information Systems Technology</div>
+           <div class="font-medium text-neutral-300">University of KwaZulu-Natal</div>
+          <div class="text-neutral-400 mt-2 text-sm">Core focus on systems analysis, advanced database design, and full-stack software development coursework.</div>
+        </div>
+      </div>
+
+      <!-- Add more items here -->
+      <!-- Example:
+      <div class="timeline-item timeline-left">
+        <div class="timeline-content">
+          ...
+        </div>
+      </div>
+      -->
+
     </div>
-    <form action="https://formsubmit.co/rajkarankeshani4@gmail.com" method="POST" class="card">
-      <input type="hidden" name="_captcha" value="false">
-      <label class="block text-sm text-neutral-300 mt-2">Name</label>
-      <input name="name" required class="w-full mt-2 p-3 bg-transparent border border-white/5 rounded" />
-      <label class="block text-sm text-neutral-300 mt-4">Email</label>
-      <input name="email" type="email" required class="w-full mt-2 p-3 bg-transparent border border-white/5 rounded" />
-      <label class="block text-sm text-neutral-300 mt-4">Message</label>
-      <textarea name="message" rows="5" required class="w-full mt-2 p-3 bg-transparent border border-white/5 rounded"></textarea>
-      <button type="submit" class="mt-4 bg-gradient-to-r from-pinky to-gold text-black font-semibold px-4 py-2 rounded">Send Message</button>
-    </form>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section fade-in-section relative overflow-hidden">
+    <!-- Background Glow Illustration -->
+    <div class="blur-glow pink" style="bottom: 0; left: -100px; opacity: 0.4;"></div>
+
+    <h2 class="text-3xl font-semibold text-white">Get In Touch</h2>
+    <p class="text-neutral-400 mt-2 max-w-2xl text-lg">I'm always open to discussing new projects and opportunities. <br>Reach me at <strong class="text-gold">rajkarankeshani4@gmail.com</strong> or use the form below.</p>
+    <div class="mt-8 grid md:grid-cols-2 gap-8">
+      
+      <!-- Contact Info -->
+      <div class="space-y-6">
+        <div class="card p-6">
+          <div class="font-semibold text-lg text-pinky">LinkedIn</div>
+          <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" class="text-neutral-400 mt-2 block break-all hover:text-pinky transition-colors">
+            www.linkedin.com/in/keshani-rajkaran-0487bb1b0
+          </a>
+        </div>
+        <div class="card p-6">
+          <div class="font-semibold text-lg text-gold">Location</div>
+          <div class="text-neutral-400 mt-2">Durban, South Africa</div>
+          <div class="text-neutral-500 text-sm">(Open to remote opportunities)</div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <form action="https://formsubmit.co/rajkarankeshani4@gmail.com" method="POST" class="card p-6 md:p-8">
+        <input type="hidden" name="_captcha" value="false">
+        <!-- 
+          FIX: Point _next to our new on-page "Thank You" section.
+          This will reload the page and jump to the #thank-you ID.
+        -->
+        <input type="hidden" name="_next" value="#thank-you">
+
+        <div class="mb-4">
+          <label class="block text-sm text-neutral-300 mb-2" for="name">Name</label>
+.
+          <input name="name" id="name" required class="w-full p-3 bg-darkbg border border-white/10 rounded-lg focus:outline-none focus:border-gold" />
+        </div>
+        
+        <div class="mb-4">
+          <label class="block text-sm text-neutral-300 mb-2" for="email">Email</label>
+          <input name="email" id="email" type="email" required class="w-full p-3 bg-darkbg border border-white/10 rounded-lg focus:outline-none focus:border-gold" />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm text-neutral-300 mb-2" for="message">Message</label>
+          <textarea name="message" id="message" rows="5" required class="w-full p-3 bg-darkbg border border-white/10 rounded-lg focus:outline-none focus:border-gold"></textarea>
+        </div>
+        
+        <button type="submit" class="w-full mt-4 bg-pinky text-white font-semibold px-6 py-3 rounded-lg btn-hover hover:shadow-glow-pink">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- NEW: Thank You / Success Section -->
+  <section id="thank-you" class="section fade-in-section text-center" style="padding-top: 10rem; padding-bottom: 10rem; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <div class="blur-glow gold" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+    <div class="relative z-10">
+      <h2 class="text-3xl font-semibold text-gold">Thank You!</h2>
+      <p class="text-neutral-300 mt-4 max-w-lg text-lg">Your message has been sent successfully. I appreciate you reaching out and will get back to you shortly.</p>
+      <div class="mt-8">
+        <a href="#hero" class="bg-gold text-black px-6 py-3 rounded-lg font-semibold btn-hover">
+          &larr; Back to Home
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/5 mt-16 py-12 px-6">
+  <div class="max-w-6xl mx-auto text-center text-neutral-500 text-sm">
+    <div>
+      <a href="#hero" class="footer-link px-2 transition-colors">Home</a>
+      <a href="#about" class="footer-link px-2 transition-colors">About</a>
+      <a href="#projects" class="footer-link px-2 transition-colors">Projects</a>
+      <a href="#resume" class="footer-link px-2 transition-colors">Experience</a>
+      <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" class="footer-link px-2 transition-colors">LinkedIn</a>
+    </div>
+    <div class="mt-4">
+      &copy; <span id="current-year"></span> Keshani Rajkaran. All rights reserved.
+    </div>
   </div>
-</section>
+</footer>
+
+<!-- NEW: Video Modal HTML -->
+<div id="video-modal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+  <!-- Modal Content -->
+  <div class="bg-lightbg rounded-lg shadow-2xl w-full max-w-4xl relative overflow-hidden border border-white/10">
+    <!-- Modal Header -->
+    <div class="flex justify-between items-center p-4 border-b border-white/10">
+      <h3 class="text-lg font-semibold text-gold">Project Demo: Seasonal Analytics</h3>
+      <button id="close-modal-btn" class="text-neutral-400 hover:text-white text-3xl leading-none">&times;</button>
+    </div>
+    <!-- Video Player -->
+    <div class="p-1 md:p-4 bg-black">
+      <video id="project-video" class="w-full" controls loop muted playsinline>
+        <!-- 
+          FIX: Updated video source to your new GitHub asset link
+        -->
+        <source src="https://github.com/user-attachments/assets/9429d6fe-fa2c-4a63-a1c9-f3ea1c0619dc" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</div>
+
 
 <script>
-  // Simple Typewriter effect
-  const lines = ["I design systems.", "I analyze data.", "I build solutions."];
-  let i = 0, j = 0, forward = true;
-  const typeEl = document.getElementById("typewriter");
-  function type() {
-    if(forward) {
-      typeEl.textContent = lines[i].slice(0, j+1);
-      j++;
-      if(j === lines[i].length) { forward = false; setTimeout(type,1000); return; }
-    } else {
-      typeEl.textContent = lines[i].slice(0, j-1);
-      j--;
-      if(j === 0) { forward = true; i = (i+1)%lines.length; }
-    }
-    setTimeout(type, forward ? 45 : 25);
-  }
-  type();
-
+  // Set current year in footer
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+  
   // Lottie animation
   const animContainer = document.getElementById('lottie-avatar');
-  lottie.loadAnimation({
-    container: animContainer,
-    renderer: 'svg',
-    loop: true,
-    autoplay: true,
-    path: 'https://assets9.lottiefiles.com/packages/lf20_Stt1R5.json' // example 2D character
+  if (animContainer) {
+    lottie.loadAnimation({
+      container: animContainer,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'https://assets9.lottiefiles.com/packages/lf20_Stt1R5.json' // example 2D character
+    });
+  }
+
+  // Intersection Observer for section animations
+  const sections = document.querySelectorAll('.fade-in-section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target); // Only animate once
+      }
+    });
+  }, { threshold: 0.1 }); // Trigger when 10% of the section is visible
+
+  sections.forEach(section => {
+    observer.observe(section);
   });
+
+  // --- NEW: Video Modal Script ---
+  const openModalBtn = document.getElementById('open-modal-btn');
+  const closeModalBtn = document.getElementById('close-modal-btn');
+  const videoModal = document.getElementById('video-modal');
+  const projectVideo = document.getElementById('project-video');
+
+  if (openModalBtn && closeModalBtn && videoModal && projectVideo) {
+    openModalBtn.addEventListener('click', () => {
+      videoModal.classList.remove('hidden');
+      projectVideo.play(); // Auto-play when modal opens
+    });
+
+    const closeModal = () => {
+      videoModal.classList.add('hidden');
+      projectVideo.pause(); // Pause video when modal closes
+      projectVideo.currentTime = 0; // Rewind to start
+    };
+
+    closeModalBtn.addEventListener('click', closeModal);
+
+    // Optional: Close modal if clicking outside the content
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) {
+        closeModal();
+      }
+    });
+  }
+  
+  // --- NEW: Robust Typewriter Script ---
+  const typeEl = document.getElementById('typewriter-hero');
+  if (typeEl) {
+    const lines = ["I design systems.", "I build scalable solutions.", "I analyze data."];
+    let lineIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typeSpeed = 100;
+    const deleteSpeed = 50;
+    const pauseTime = 2000;
+
+    function typeWriter() {
+      const currentLine = lines[lineIndex];
+
+      if (isDeleting) {
+        // Deleting
+        typeEl.textContent = currentLine.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+          isDeleting = false;
+          lineIndex = (lineIndex + 1) % lines.length;
+          setTimeout(typeWriter, 500); // Pause before typing new line
+        } else {
+          setTimeout(typeWriter, deleteSpeed);
+        }
+      } else {
+        // Typing
+        typeEl.textContent = currentLine.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === currentLine.length) {
+          isDeleting = true;
+          setTimeout(typeWriter, pauseTime); // Pause at end of line
+        } else {
+          setTimeout(typeWriter, typeSpeed);
+        }
+      }
+    }
+    // Start the effect
+    setTimeout(typeWriter, 1000); // Start after a short delay
+  }
+
 </script>
 
 </body>
