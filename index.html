@@ -1,589 +1,194 @@
-// Project: nextjs-portfolio
-// Use this as a drop-in Next.js App Router project.
-// Files below are separated by file path headers. Create the files accordingly.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keshani Rajkaran — Systems Analyst & Developer</title>
 
-/* package.json */
-{
-  "name": "keshani-portfolio",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "framer-motion": "^10.12.17",
-    "next": "14.3.0",
-    "nodemailer": "^6.9.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.24",
-    "tailwindcss": "^3.5.5"
-  }
-}
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Framer Motion CDN -->
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
 
-/* next.config.js */
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
-module.exports = nextConfig
+  <!-- Lottie -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-/* tailwind.config.js */
-module.exports = {
-  content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
-  theme: {
-    extend: {
-      colors: {
-        gold: '#D4AF37',
-        pinky: '#ffb6c1',
-        darkbg: '#050505',
-        card: '#0f0f0f'
-      }
-    }
-  },
-  plugins: [],
-}
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #050505; color: #fff; margin: 0; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .section { padding: 5rem 1.5rem; max-width: 1200px; margin: auto; }
+    .card { background: #0f0f0f; border: 1px solid rgba(255,255,255,0.05); border-radius: 1rem; padding: 1.5rem; }
+    .typewriter { color: #D4AF37; font-family: 'JetBrains Mono', monospace; font-size: 1.125rem; }
+    a { text-decoration: none; }
+  </style>
+</head>
+<body>
 
+<!-- HEADER -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur border-b border-white/5">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="font-bold text-white">Keshani Rajkaran</div>
+    <nav class="hidden md:flex gap-6 items-center text-sm text-neutral-300">
+      <a href="#about">About</a>
+      <a href="#projects">My Work</a>
+      <a href="#specialties">Specialties</a>
+      <a href="#resume">Experience</a>
+      <a href="#contact" class="text-black bg-gold px-3 py-2 rounded">Contact</a>
+      <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" class="pl-2">LinkedIn</a>
+    </nav>
+  </div>
+</header>
 
-/* postcss.config.js */
-module.exports = {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
-}
+<!-- HERO -->
+<section id="hero" class="section grid md:grid-cols-2 gap-8 items-center pt-28">
+  <div>
+    <div class="font-mono text-pinky mb-2">SYSTEMS ANALYST & DEVELOPER</div>
+    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Hi, I’m Keshani Rajkaran</h1>
+    <div class="text-neutral-300 mt-2 font-semibold">Software Developer</div>
+    <div class="mt-6 typewriter" id="typewriter"></div>
+    <p class="text-neutral-400 mt-6 max-w-2xl">I deliver production-grade systems and data-driven dashboards that provide operational clarity. I focus on reliability, security and measurable impact.</p>
+    <div class="mt-6 flex gap-3">
+      <a href="#projects" class="bg-gold text-black px-4 py-2 rounded font-semibold">View Work</a>
+      <a href="#contact" class="border border-white/10 px-4 py-2 rounded text-neutral-200">Contact</a>
+    </div>
+  </div>
+  <div id="lottie-avatar" class="w-full max-w-[300px] mx-auto"></div>
+</section>
 
-
-/* .env.example */
-# Copy to .env.local and fill values
-# SMTP settings for sending email from server route
-SMTP_HOST=smtp.example.com
-SMTP_PORT=587
-SMTP_USER=your_smtp_user
-SMTP_PASS=your_smtp_password
-# Destination email (your inbox)
-TO_EMAIL=rajkarankeshani4@gmail.com
-
-
-/* app/globals.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root{
-  --bg: #050505;
-  --card: #0f0f0f;
-  --text: #ffffff;
-  --muted: #bdbdbd;
-}
-
-html,body,#root{height:100%}
-body{
-  @apply bg-[var(--bg)] text-white antialiased;
-}
-
-/* small helper transition for page content */
-.section-fade-enter{opacity:0;transform:translateY(6px)}
-.section-fade-enter-active{opacity:1;transform:none;transition:all .45s cubic-bezier(.2,.9,.2,1)}
-
-/* fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
-
-.font-sans{font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
-.font-mono{font-family: 'JetBrains Mono', monospace}
-
-
-/* app/layout.js */
-import './globals.css'
-import { Inter } from 'next/font/google'
-import Header from '../components/Header'
-
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata = {
-  title: 'Keshani Rajkaran — Systems Analyst & Developer',
-  description: 'Systems Analyst and Developer — enterprise systems, data engineering, dashboards.'
-}
-
-export default function RootLayout({ children }){
-  return (
-    <html lang="en">
-      <body className={`${inter.className} font-sans bg-darkbg`}> 
-        <Header />
-        <main className="pt-20">{children}</main>
-      </body>
-    </html>
-  )
-}
-
-
-/* app/page.js */
-'use client'
-import Hero from '../components/Hero'
-import About from '../components/About'
-import Specialties from '../components/Specialties'
-import Projects from '../components/Projects'
-import Timeline from '../components/Timeline'
-import ContactForm from '../components/ContactForm'
-import { AnimatePresence, motion } from 'framer-motion'
-
-export default function Page(){
-  return (
-    <AnimatePresence mode="wait">
-      <motion.div key="page" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:0.35}}>
-        <Hero />
-        <About />
-        <Specialties />
-        <Projects />
-        <Timeline />
-        <ContactForm />
-      </motion.div>
-    </AnimatePresence>
-  )
-}
-
-
-/* components/Header.js */
-'use client'
-import Link from 'next/link'
-import { useState } from 'react'
-
-export default function Header(){
-  const [open,setOpen] = useState(false)
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur border-b border-white/5">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <div className="font-bold text-white">Keshani Rajkaran</div>
-        <nav className="hidden md:flex gap-6 items-center text-sm text-neutral-300">
-          <a href="#about">About</a>
-          <a href="#projects">My Work</a>
-          <a href="#specialties">Specialties</a>
-          <a href="#resume">Experience</a>
-          <a href="#contact" className="text-black bg-gold px-3 py-2 rounded">Contact</a>
-          <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" rel="noreferrer" className="pl-2"><i className="fab fa-linkedin"></i></a>
-        </nav>
-        <button className="md:hidden text-white" onClick={()=>setOpen(!open)} aria-label="menu">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="white" strokeWidth="1.6" strokeLinecap="round"/></svg>
-        </button>
+<!-- ABOUT -->
+<section id="about" class="section">
+  <h2 class="text-2xl font-semibold">Core competencies</h2>
+  <p class="text-neutral-400 mt-2 max-w-2xl">Direct delivery: high-availability systems, secure data access, and dashboards that drive decisions.</p>
+  <div class="grid md:grid-cols-3 gap-6 mt-6">
+    <div class="card">
+      <div class="font-semibold">Systems / Integration</div>
+      <div class="text-neutral-400 mt-2 text-sm">Modular services, APIs, and reliable integrations for enterprise workflows.</div>
+      <div class="flex gap-2 flex-wrap mt-4">
+        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Microservices</span>
+        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">APIs</span>
       </div>
-      {/* mobile menu */}
-      {open && (
-        <div className="md:hidden px-6 pb-6">
-          <div className="flex flex-col gap-3 text-neutral-300">
-            <a href="#about">About</a>
-            <a href="#projects">My Work</a>
-            <a href="#specialties">Specialties</a>
-            <a href="#resume">Experience</a>
-            <a href="#contact">Contact</a>
-          </div>
-        </div>
-      )}
-    </header>
-  )
-}
-
-
-/* components/Hero.js */
-'use client'
-import Typewriter from './Typewriter'
-import Avatar from './Avatar'
-
-export default function Hero(){
-  return (
-    <section id="hero" className="pt-28">
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
-        <div>
-          <div className="font-mono text-pinky mb-2">SYSTEMS ANALYST & DEVELOPER</div>
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">Hi, I’m Keshani Rajkaran</h1>
-          <div className="text-neutral-300 mt-2 font-semibold">Software Developer</div>
-
-          <div className="mt-6 flex items-center gap-3">
-            <Typewriter lines={["I design systems.", "I analyze data.", "I build solutions."]} />
-          </div>
-
-          <p className="text-neutral-400 mt-6 max-w-2xl">I deliver production-grade systems and data-driven dashboards that provide operational clarity. I focus on reliability, security and measurable impact.</p>
-
-          <div className="mt-6 flex gap-3">
-            <a href="#projects" className="bg-gold text-black px-4 py-2 rounded font-semibold">View Work</a>
-            <a href="#contact" className="border border-white/10 px-4 py-2 rounded text-neutral-200">Contact</a>
-          </div>
-        </div>
-
-        <div className="flex justify-end">
-          <Avatar />
-        </div>
+    </div>
+    <div class="card">
+      <div class="font-semibold">Data Engineering</div>
+      <div class="text-neutral-400 mt-2 text-sm">SQL optimization, ETL pipelines and secure access to data.</div>
+      <div class="flex gap-2 flex-wrap mt-4">
+        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">T-SQL</span>
+        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">MSSQL</span>
       </div>
-    </section>
-  )
-}
+    </div>
+    <div class="card">
+      <div class="font-semibold">Dashboards & BI</div>
+      <div class="text-neutral-400 mt-2 text-sm">Clear dashboards for operations and executive KPIs.</div>
+      <div class="flex gap-2 flex-wrap mt-4">
+        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Chart.js</span>
+        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Data viz</span>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- SPECIALTIES -->
+<section id="specialties" class="section">
+  <h2 class="text-2xl font-semibold">Specialties</h2>
+  <p class="text-neutral-400 mt-2 max-w-2xl">Practical outcomes — what I can deliver for your team or project.</p>
+  <div class="grid md:grid-cols-4 gap-4 mt-6">
+    <div class="card">Production Services<br><small>Build and maintain backend services.</small></div>
+    <div class="card">Data pipelines<br><small>Reliable ETL and streaming pipelines.</small></div>
+    <div class="card">Dashboarding<br><small>Real-time dashboards for KPIs.</small></div>
+    <div class="card">Consultation<br><small>Pragmatic improvements for legacy systems.</small></div>
+  </div>
+</section>
 
-/* components/Typewriter.js */
-'use client'
-import { useEffect, useState } from 'react'
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <h2 class="text-2xl font-semibold">My Projects / Work</h2>
+  <div class="grid md:grid-cols-2 gap-6 mt-6">
+    <a href="https://github.com/Keshani-Rajkaran/Enterprise-Seasonal-Analytics-Reporting-System" target="_blank" class="card hover:scale-105 transition-transform">
+      <div class="font-semibold text-lg">Seasonal Analytics Engine</div>
+      <div class="text-neutral-400 mt-2">Automated YoY reporting, integrated into ERP with real-time dashboards.</div>
+      <div class="flex gap-2 flex-wrap mt-4">
+        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">C#</span>
+        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">ASP.NET</span>
+        <span class="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">MSSQL</span>
+      </div>
+    </a>
+  </div>
+</section>
 
-export default function Typewriter({ lines = [] }){
-  const [lineIndex,setLineIndex] = useState(0)
-  const [visibleText,setVisibleText] = useState('')
-  const [forward,setForward] = useState(true)
+<!-- TIMELINE -->
+<section id="resume" class="section">
+  <h2 class="text-2xl font-semibold">Experience</h2>
+  <div class="space-y-4 mt-6">
+    <div class="card">
+      <div class="text-sm font-mono text-neutral-400">Jan 2025 – Present</div>
+      <div class="font-semibold mt-1">Lead Systems Developer — McKaylan Motor Engineering</div>
+      <div class="text-neutral-400 mt-2">Digital transformation to cloud-ready ERP with modular subsystems.</div>
+    </div>
+    <div class="card">
+      <div class="text-sm font-mono text-neutral-400">Expected Graduation: 2025</div>
+      <div class="font-semibold mt-1">BCom Information Systems Technology — University of KwaZulu-Natal</div>
+      <div class="text-neutral-400 mt-2">Systems analysis, database design, and software development coursework.</div>
+    </div>
+  </div>
+</section>
 
-  useEffect(()=>{
-    let timeout;
-    const current = lines[lineIndex];
-    if(forward){
-      if(visibleText.length < current.length){
-        timeout = setTimeout(()=> setVisibleText(current.slice(0, visibleText.length+1)), 45)
-      } else {
-        timeout = setTimeout(()=> setForward(false), 1000)
-      }
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <h2 class="text-2xl font-semibold">Contact</h2>
+  <p class="text-neutral-400 mt-2 max-w-2xl">Reach me at <strong>rajkarankeshani4@gmail.com</strong> or use the form below.</p>
+  <div class="mt-6 grid md:grid-cols-2 gap-6">
+    <div class="card">
+      <div class="font-semibold">LinkedIn</div>
+      <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" class="text-neutral-400 mt-2 block">www.linkedin.com/in/keshani-rajkaran-0487bb1b0</a>
+      <div class="mt-4 font-semibold">Location</div>
+      <div class="text-neutral-400">Durban, South Africa</div>
+    </div>
+    <form action="https://formsubmit.co/rajkarankeshani4@gmail.com" method="POST" class="card">
+      <input type="hidden" name="_captcha" value="false">
+      <label class="block text-sm text-neutral-300 mt-2">Name</label>
+      <input name="name" required class="w-full mt-2 p-3 bg-transparent border border-white/5 rounded" />
+      <label class="block text-sm text-neutral-300 mt-4">Email</label>
+      <input name="email" type="email" required class="w-full mt-2 p-3 bg-transparent border border-white/5 rounded" />
+      <label class="block text-sm text-neutral-300 mt-4">Message</label>
+      <textarea name="message" rows="5" required class="w-full mt-2 p-3 bg-transparent border border-white/5 rounded"></textarea>
+      <button type="submit" class="mt-4 bg-gradient-to-r from-pinky to-gold text-black font-semibold px-4 py-2 rounded">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<script>
+  // Simple Typewriter effect
+  const lines = ["I design systems.", "I analyze data.", "I build solutions."];
+  let i = 0, j = 0, forward = true;
+  const typeEl = document.getElementById("typewriter");
+  function type() {
+    if(forward) {
+      typeEl.textContent = lines[i].slice(0, j+1);
+      j++;
+      if(j === lines[i].length) { forward = false; setTimeout(type,1000); return; }
     } else {
-      if(visibleText.length > 0){
-        timeout = setTimeout(()=> setVisibleText(current.slice(0, visibleText.length-1)), 25)
-      } else {
-        setForward(true)
-        setLineIndex((lineIndex+1)%lines.length)
-      }
+      typeEl.textContent = lines[i].slice(0, j-1);
+      j--;
+      if(j === 0) { forward = true; i = (i+1)%lines.length; }
     }
-    return ()=> clearTimeout(timeout)
-  },[visibleText, forward, lineIndex, lines])
-
-  return (
-    <div className="font-mono text-gold text-lg">{visibleText}<span className="ml-1 opacity-90">|</span></div>
-  )
-}
-
-
-/* components/Avatar.js */
-'use client'
-import { motion } from 'framer-motion'
-
-export default function Avatar(){
-  return (
-    <motion.div initial={{opacity:0, x:30}} animate={{opacity:1, x:0}} transition={{duration:0.6}} className="w-full max-w-[340px]">
-      <div className="bg-card rounded-2xl p-6 border border-white/5">
-        <div className="flex gap-4 items-center">
-          <div className="w-28 h-28 rounded-xl overflow-hidden bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center">
-            {/* prettier, professional SVG portrait */}
-            <svg width="112" height="112" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <defs>
-                <linearGradient id="g1" x1="0" x2="1">
-                  <stop offset="0" stop-color="#f9d6d6" />
-                  <stop offset="1" stop-color="#f5cfcf" />
-                </linearGradient>
-              </defs>
-              <rect width="120" height="120" rx="20" fill="#0b0b0b" />
-              <g transform="translate(14,12)">
-                <ellipse cx="44" cy="24" rx="22" ry="26" fill="url(#g1)" />
-                <path d="M16 22c6-16 48-24 60 6-2 14-26 18-44 16-18-2-28-14-16-22z" fill="#111827" />
-                <circle cx="36" cy="24" r="3" fill="#111827" />
-                <circle cx="52" cy="24" r="3" fill="#111827" />
-                <rect x="16" y="56" rx="10" width="56" height="28" fill="#111827" />
-                {/* waving arm */}
-                <g transform="translate(66,64)">
-                  <motion.g animate={{rotate:[-8,8,-8]}} transition={{repeat:Infinity, duration:3}}>
-                    <rect x="0" y="0" width="8" height="28" rx="4" fill="#f9d6d6" />
-                    <rect x="6" y="22" width="22" height="8" rx="4" fill="#f9d6d6" transform="rotate(-18 17 26)" />
-                    <rect x="-2" y="-6" width="26" height="16" rx="8" fill="#111827" />
-                  </motion.g>
-                </g>
-              </g>
-            </svg>
-          </div>
-          <div>
-            <div className="text-lg font-bold">Welcome to my portfolio</div>
-            <div className="text-neutral-400 mt-1">Hi — I build reliable, measurable systems for product and operations teams.</div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
-
-/* components/About.js */
-'use client'
-export default function About(){
-  return (
-    <section id="about" className="pt-20">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-2xl font-semibold">Core competencies</h2>
-        <p className="text-neutral-400 mt-2 max-w-2xl">Direct delivery: high-availability systems, secure data access, and dashboards that drive decisions. I work with teams to convert requirements into repeatable, testable solutions.</p>
-
-        <div className="grid md:grid-cols-3 gap-6 mt-6">
-          <div className="bg-card rounded-xl p-6 border border-white/5">
-            <div className="font-semibold">Systems / Integration</div>
-            <div className="text-neutral-400 mt-2 text-sm">Modular services, APIs, and reliable integrations for enterprise workflows.</div>
-            <div className="flex gap-2 flex-wrap mt-4">
-              <span className="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Microservices</span>
-              <span className="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">APIs</span>
-            </div>
-          </div>
-
-          <div className="bg-card rounded-xl p-6 border border-white/5">
-            <div className="font-semibold">Data Engineering</div>
-            <div className="text-neutral-400 mt-2 text-sm">SQL optimization, ETL pipelines and secure parameterized access to data.</div>
-            <div className="flex gap-2 flex-wrap mt-4">
-              <span className="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">T-SQL</span>
-              <span className="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">MSSQL</span>
-            </div>
-          </div>
-
-          <div className="bg-card rounded-xl p-6 border border-white/5">
-            <div className="font-semibold">Dashboards & BI</div>
-            <div className="text-neutral-400 mt-2 text-sm">Clear dashboards for operations and executive KPIs.</div>
-            <div className="flex gap-2 flex-wrap mt-4">
-              <span className="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Chart.js</span>
-              <span className="text-sm font-mono px-3 py-1 bg-black/30 rounded-full">Data viz</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-
-/* components/Specialties.js */
-'use client'
-import { motion } from 'framer-motion'
-
-const items = [
-  {title:'Production Services', desc:'Build and maintain backend services that handle high transaction volumes.'},
-  {title:'Data pipelines', desc:'Design ETL and streaming pipelines for reliable data movement.'},
-  {title:'Dashboarding', desc:'Real-time dashboards for operations and KPI tracking.'},
-  {title:'Consultation', desc:'Recommend pragmatic improvements for legacy systems.'}
-]
-
-export default function Specialties(){
-  return (
-    <section id="specialties" className="pt-20">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-2xl font-semibold">Specialties</h2>
-        <p className="text-neutral-400 mt-2 max-w-2xl">Practical outcomes — what I can deliver for your team or project.</p>
-
-        <div className="grid md:grid-cols-4 gap-4 mt-6">
-          {items.map((it, idx)=> (
-            <motion.div key={it.title} initial={{opacity:0, y:8}} whileInView={{opacity:1, y:0}} transition={{delay:idx*0.08}} className="bg-card p-4 rounded-lg border border-white/5">
-              <div className="font-semibold">{it.title}</div>
-              <div className="text-neutral-400 text-sm mt-2">{it.desc}</div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-
-/* components/Projects.js */
-'use client'
-import { motion } from 'framer-motion'
-
-export default function Projects(){
-  return (
-    <section id="projects" className="pt-20">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-2xl font-semibold">My Projects / Work</h2>
-        <p className="text-neutral-400 mt-2 max-w-2xl">Selected work demonstrating reliable delivery and measurable outcomes.</p>
-
-        <div className="grid md:grid-cols-2 gap-6 mt-6">
-          <motion.a target="_blank" href="https://github.com/Keshani-Rajkaran/Enterprise-Seasonal-Analytics-Reporting-System" className="bg-card p-6 rounded-xl border border-white/5 hover:shadow-lg transition" whileHover={{scale:1.02}}>
-            <div className="font-semibold text-lg">Seasonal Analytics Engine</div>
-            <div className="text-neutral-400 mt-2">Replaced manual reporting with a real-time analytics engine integrated into the ERP. Automated YoY comparisons and operational safety checks.</div>
-            <div className="flex gap-2 flex-wrap mt-4">
-              <span className="font-mono text-sm px-3 py-1 bg-black/30 rounded-full">C#</span>
-              <span className="font-mono text-sm px-3 py-1 bg-black/30 rounded-full">ASP.NET</span>
-              <span className="font-mono text-sm px-3 py-1 bg-black/30 rounded-full">MSSQL</span>
-            </div>
-          </motion.a>
-
-          {/* Additional project placeholders removed per request */}
-
-        </div>
-      </div>
-    </section>
-  )
-}
-
-
-/* components/Timeline.js */
-'use client'
-import { motion } from 'framer-motion'
-
-export default function Timeline(){
-  return (
-    <section id="resume" className="pt-20">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-2xl font-semibold">Experience</h2>
-        <p className="text-neutral-400 mt-2 max-w-2xl">Direct roles and recent engagements.</p>
-
-        <div className="mt-6 space-y-4">
-          <motion.div className="p-4 bg-card border border-white/5 rounded-lg" initial={{opacity:0, x:-10}} whileInView={{opacity:1, x:0}}>
-            <div className="text-sm font-mono text-neutral-400">Jan 2025 – Present</div>
-            <div className="font-semibold mt-1">Lead Systems Developer (Capstone) — McKaylan Motor Engineering</div>
-            <div className="text-neutral-400 mt-2">Led the digital transformation of an engineering workshop to a cloud-ready ERP environment. Delivered modular sub-systems including appointment tracking and automated financial processing.</div>
-          </motion.div>
-
-          <motion.div className="p-4 bg-card border border-white/5 rounded-lg" initial={{opacity:0, x:-10}} whileInView={{opacity:1, x:0}} transition={{delay:0.06}}>
-            <div className="text-sm font-mono text-neutral-400">May 2025 – Jun 2025</div>
-            <div className="font-semibold mt-1">Forensic AI Strategy Analyst (Intern) — Grant Thornton China</div>
-            <div className="text-neutral-400 mt-2">Analyzed data to recommend fraud-detection approaches; presented compliance insights to leadership.</div>
-          </motion.div>
-
-          <motion.div className="p-4 bg-card border border-white/5 rounded-lg" initial={{opacity:0, x:-10}} whileInView={{opacity:1, x:0}} transition={{delay:0.12}}>
-            <div className="text-sm font-mono text-neutral-400">Expected Graduation: 2025</div>
-            <div className="font-semibold mt-1">BCom Information Systems Technology — University of KwaZulu-Natal</div>
-            <div className="text-neutral-400 mt-2">Coursework in systems analysis, database design and software development.</div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-
-/* components/ContactForm.js */
-'use client'
-import { useState } from 'react'
-
-export default function ContactForm(){
-  const [submitting, setSubmitting] = useState(false)
-  const [status, setStatus] = useState('')
-
-  async function onSubmit(e){
-    e.preventDefault()
-    setSubmitting(true)
-    setStatus('')
-
-    const form = new FormData(e.target)
-    const payload = Object.fromEntries(form.entries())
-
-    try{
-      const r = await fetch('/api/send-email',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify(payload)
-      })
-      const json = await r.json()
-      if(r.ok){
-        setStatus('Message sent. I will respond via email.')
-        e.target.reset()
-      } else {
-        setStatus(json.error || 'Failed to send message. Please email directly.')
-      }
-    } catch(err){
-      setStatus('Network error. Please email directly.')
-    } finally {
-      setSubmitting(false)
-    }
+    setTimeout(type, forward ? 45 : 25);
   }
+  type();
 
-  return (
-    <section id="contact" className="pt-20">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-2xl font-semibold">Contact</h2>
-        <p className="text-neutral-400 mt-2 max-w-2xl">Open to engineering roles. Reach me at <strong className="text-white">rajkarankeshani4@gmail.com</strong> or use the contact form below.</p>
+  // Lottie animation
+  const animContainer = document.getElementById('lottie-avatar');
+  lottie.loadAnimation({
+    container: animContainer,
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'https://assets9.lottiefiles.com/packages/lf20_Stt1R5.json' // example 2D character
+  });
+</script>
 
-        <div className="mt-6 grid md:grid-cols-2 gap-6">
-          <div className="bg-card p-6 rounded-xl border border-white/5">
-            <div className="font-semibold">LinkedIn</div>
-            <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" rel="noreferrer" className="text-neutral-400 mt-2 block">www.linkedin.com/in/keshani-rajkaran-0487bb1b0</a>
-
-            <div className="mt-4 font-semibold">Location</div>
-            <div className="text-neutral-400">Durban, South Africa</div>
-          </div>
-
-          <form onSubmit={onSubmit} className="bg-card p-6 rounded-xl border border-white/5">
-            <label className="block text-sm text-neutral-300">Name</label>
-            <input required name="name" className="w-full mt-2 p-3 bg-transparent border border-white/5 rounded" />
-
-            <label className="block text-sm text-neutral-300 mt-4">Email</label>
-            <input required name="email" type="email" className="w-full mt-2 p-3 bg-transparent border border-white/5 rounded" />
-
-            <label className="block text-sm text-neutral-300 mt-4">Message</label>
-            <textarea required name="message" rows="5" className="w-full mt-2 p-3 bg-transparent border border-white/5 rounded" />
-
-            <div className="mt-4 flex items-center gap-3">
-              <button disabled={submitting} className="bg-gradient-to-r from-pinky to-gold text-black font-semibold px-4 py-2 rounded">{submitting? 'Sending...':'Send message'}</button>
-              <div className="text-sm text-neutral-400">{status}</div>
-            </div>
-          </form>
-        </div>
-
-      </div>
-    </section>
-  )
-}
-
-
-/* app/api/send-email/route.js */
-import nodemailer from 'nodemailer'
-
-export async function POST(req){
-  try{
-    const body = await req.json()
-    const { name, email, message } = body
-    if(!name || !email || !message) return new Response(JSON.stringify({error:'Missing fields'}), { status:400 })
-
-    // read credentials from env
-    const host = process.env.SMTP_HOST
-    const port = Number(process.env.SMTP_PORT) || 587
-    const user = process.env.SMTP_USER
-    const pass = process.env.SMTP_PASS
-    const to = process.env.TO_EMAIL || 'rajkarankeshani4@gmail.com'
-
-    if(!host || !user || !pass) {
-      // If SMTP is not configured, return a helpful error so you can set env vars in production.
-      console.error('SMTP not configured. Set SMTP_HOST, SMTP_USER, SMTP_PASS in .env.local')
-      return new Response(JSON.stringify({ error: 'Email service not configured on server.' }), { status: 500 })
-    }
-
-    const transporter = nodemailer.createTransport({
-      host,
-      port,
-      secure: port === 465, // true for 465, false for other ports
-      auth: { user, pass }
-    })
-
-    const mail = {
-      from: `${name} <${email}>`,
-      to,
-      subject: `Portfolio contact from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong><br/>${message.replace(/\n/g,'<br/>')}</p>`
-    }
-
-    await transporter.sendMail(mail)
-    return new Response(JSON.stringify({ success: true }), { status: 200 })
-  } catch(err){
-    console.error(err)
-    return new Response(JSON.stringify({ error: 'Server error' }), { status: 500 })
-  }
-}
-
-
-/* README instructions (copy below into your repo README) */
-/*
-1) Install
-   npm install
-
-2) Copy .env.example -> .env.local and fill SMTP_* variables
-   SMTP_HOST=...
-   SMTP_PORT=587
-   SMTP_USER=...
-   SMTP_PASS=...
-   TO_EMAIL=rajkarankeshani4@gmail.com
-
-3) Run locally
-   npm run dev
-
-Notes on email: the server route uses nodemailer and requires SMTP credentials on the server (recommended: a transactional email provider). If you prefer a serverless provider (SendGrid, Mailgun), you can adapt the transporter accordingly.
-*/
+</body>
+</html>
