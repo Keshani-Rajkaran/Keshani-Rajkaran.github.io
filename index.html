@@ -516,70 +516,53 @@
     <!-- Background Glow Illustration -->
     <div class="blur-glow pink" style="bottom: 0; left: -100px; opacity: 0.4;"></div>
 
-    <h2 class="text-3xl font-semibold text-white">Get In Touch</h2>
-    <p class="text-neutral-400 mt-2 max-w-2xl text-lg">I'm always open to discussing new projects and opportunities. <br>Reach me at <strong class="text-gold">rajkarankeshani4@gmail.com</strong> or use the form below.</p>
-    <div class="mt-8 grid md:grid-cols-2 gap-8">
+    <h2 class="text-3xl font-semibold text-white text-center">Get In Touch</h2>
+    <p class="text-neutral-400 mt-2 max-w-2xl text-lg text-center mx-auto">
+      I'm always open to discussing new projects and opportunities.
+      <br>The best way to reach me is via Email or LinkedIn.
+    </p>
+
+    <!--
+      REBUILT CONTACT SECTION:
+      - Removed md:grid-cols-2
+      - Removed the <form>
+      - Centered the remaining contact cards
+    -->
+    <div class="mt-8 flex justify-center">
       
-      <!-- Contact Info -->
-      <div class="space-y-6">
-        <div class="card p-6">
-          <div class="font-semibold text-lg text-pinky">LinkedIn</div>
-          <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" class="text-neutral-400 mt-2 block break-all hover:text-pinky transition-colors">
-            www.linkedin.com/in/keshani-rajkaran-0487bb1b0
-          </a>
-        </div>
-        <div class="card p-6">
-          <div class="font-semibold text-lg text-gold">Location</div>
-          <div class="text-neutral-400 mt-2">Durban, South Africa</div>
+      <!-- Centered container for contact cards -->
+      <div class="space-y-6 w-full max-w-lg">
+        
+        <!-- NEW: Email Card -->
+        <a href="mailto:rajkarankeshani4@gmail.com" class="card block p-6 text-center hover:!shadow-glow-pink hover:!border-pinky/50">
+          <div class="font-semibold text-lg text-pinky">Email Me</div>
+          <div class="text-neutral-300 mt-1 font-mono">
+            rajkarankeshani4@gmail.com
+          </div>
+        </a>
+
+        <!-- LinkedIn Card -->
+        <a href="https://www.linkedin.com/in/keshani-rajkaran-0487bb1b0" target="_blank" class="card block p-6 text-center">
+          <div class="font-semibold text-lg text-gold">LinkedIn</div>
+          <div class="text-neutral-400 mt-1 block break-all">
+            in/keshani-rajkaran-0487bb1b0
+          </div>
+        </a>
+        
+        <!-- Location Card -->
+        <div class="card p-6 text-center">
+          <div class="font-semibold text-lg text-white">Location</div>
+          <div class="text-neutral-400 mt-1">Durban, South Africa</div>
           <div class="text-neutral-500 text-sm">(Open to remote opportunities)</div>
         </div>
+
       </div>
 
-      <!-- Contact Form -->
-      <form action="https://formsubmit.co/rajkarankeshani4@gmail.com" method=POST class="card p-6 md:p-8">
-        <input type="hidden" name="_captcha" value="false">
-        <!-- 
-          FIX: Point _next to our new on-page "Thank You" section.
-          This will reload the page and jump to the #thank-you ID.
-        -->
-        <input type="hidden" name="_next" value="#thank-you">
-
-        <div class="mb-4">
-          <label class="block text-sm text-neutral-300 mb-2" for="name">Name</label>
-.
-          <input name="name" id="name" required class="w-full p-3 bg-darkbg border border-white/10 rounded-lg focus:outline-none focus:border-gold" />
-        </div>
-        
-        <div class="mb-4">
-          <label class="block text-sm text-neutral-300 mb-2" for="email">Email</label>
-          <input name="email" id="email" type="email" required class="w-full p-3 bg-darkbg border border-white/10 rounded-lg focus:outline-none focus:border-gold" />
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-sm text-neutral-300 mb-2" for="message">Message</label>
-          <textarea name="message" id="message" rows="5" required class="w-full p-3 bg-darkbg border border-white/10 rounded-lg focus:outline-none focus:border-gold"></textarea>
-        </div>
-        
-        <button type="submit" class="w-full mt-4 bg-pinky text-white font-semibold px-6 py-3 rounded-lg btn-hover hover:shadow-glow-pink">
-          Send Message
-        </button>
-      </form>
     </div>
   </section>
 
-  <!-- NEW: Thank You / Success Section -->
-  <section id="thank-you" class="section fade-in-section text-center" style="padding-top: 10rem; padding-bottom: 10rem; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-    <div class="blur-glow gold" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
-    <div class="relative z-10">
-      <h2 class="text-3xl font-semibold text-gold">Thank You!</h2>
-      <p class="text-neutral-300 mt-4 max-w-lg text-lg">Your message has been sent successfully. I appreciate you reaching out and will get back to you shortly.</p>
-      <div class="mt-8">
-        <a href="#hero" class="bg-gold text-black px-6 py-3 rounded-lg font-semibold btn-hover">
-          &larr; Back to Home
-        </a>
-      </div>
-    </div>
-  </section>
+  <!-- DELETED: Thank You / Success Section -->
+  <!-- <section id="thank-you" ... > ... </section> -->
 
 </main>
 
